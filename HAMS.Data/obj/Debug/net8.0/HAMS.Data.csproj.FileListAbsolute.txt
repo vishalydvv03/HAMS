@@ -1,0 +1,5 @@
+C:\Users\visha\source\repos\HAMS\HAMS.Data\obj\Debug\net8.0\HAMS.Data.csproj.AssemblyReference.cache
+C:\Users\visha\source\repos\HAMS\HAMS.Data\obj\Debug\net8.0\HAMS.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\visha\source\repos\HAMS\HAMS.Data\obj\Debug\net8.0\HAMS.Data.AssemblyInfoInputs.cache
+C:\Users\visha\source\repos\HAMS\HAMS.Data\obj\Debug\net8.0\HAMS.Data.AssemblyInfo.cs
+C:\Users\visha\source\repos\HAMS\HAMS.Data\obj\Debug\net8.0\HAMS.Data.csproj.CoreCompileInputs.cache

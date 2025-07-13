@@ -1,0 +1,7 @@
+C:\Users\visha\source\repos\HAMS\HAMS.API\obj\Debug\net8.0\HAMS.API.csproj.AssemblyReference.cache
+C:\Users\visha\source\repos\HAMS\HAMS.API\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\visha\source\repos\HAMS\HAMS.API\obj\Debug\net8.0\HAMS.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\visha\source\repos\HAMS\HAMS.API\obj\Debug\net8.0\HAMS.API.AssemblyInfoInputs.cache
+C:\Users\visha\source\repos\HAMS\HAMS.API\obj\Debug\net8.0\HAMS.API.AssemblyInfo.cs
+C:\Users\visha\source\repos\HAMS\HAMS.API\obj\Debug\net8.0\HAMS.API.csproj.CoreCompileInputs.cache
+C:\Users\visha\source\repos\HAMS\HAMS.API\obj\Debug\net8.0\HAMS.API.MvcApplicationPartsAssemblyInfo.cache
