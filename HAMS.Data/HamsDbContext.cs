@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HAMS.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,14 @@ namespace HAMS.Data
 {
     public class HamsDbContext : DbContext 
     {
+        public HamsDbContext(DbContextOptions<HamsDbContext> options) : base(options) 
+        { 
 
+        }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Department> Departements { get; set; }
     }
 }
