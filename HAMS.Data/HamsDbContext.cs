@@ -20,9 +20,15 @@ namespace HAMS.Data
             cb.Properties<Enum>().HaveConversion<string>();
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(HamsDbContext).Assembly);
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<Department> Departements { get; set; }
+        public DbSet<Department> Departments { get; set; }
     }
 }

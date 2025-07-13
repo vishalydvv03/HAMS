@@ -47,7 +47,33 @@ namespace HAMS.Data.Migrations
 
                     b.HasKey("DepartmentId");
 
-                    b.ToTable("Departements");
+                    b.ToTable("Departments");
+
+                    b.HasData(
+                        new
+                        {
+                            DepartmentId = 1,
+                            CreatedAt = new DateTime(2025, 7, 13, 14, 11, 49, 924, DateTimeKind.Utc).AddTicks(732),
+                            DeptName = "Cardiology",
+                            Description = "Heart & vascular care",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            DepartmentId = 2,
+                            CreatedAt = new DateTime(2025, 7, 13, 14, 11, 49, 924, DateTimeKind.Utc).AddTicks(734),
+                            DeptName = "Orthopedics",
+                            Description = "Bones, joints & spine",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            DepartmentId = 3,
+                            CreatedAt = new DateTime(2025, 7, 13, 14, 11, 49, 924, DateTimeKind.Utc).AddTicks(735),
+                            DeptName = "Dermatology",
+                            Description = "Skin & hair",
+                            IsActive = true
+                        });
                 });
 
             modelBuilder.Entity("HAMS.Domain.Entities.Doctor", b =>
@@ -138,6 +164,28 @@ namespace HAMS.Data.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            ContactNo = "9876543210",
+                            CreatedAt = new DateTime(2025, 7, 13, 14, 11, 49, 984, DateTimeKind.Utc).AddTicks(5736),
+                            Email = "admin@hams.com",
+                            IsActive = true,
+                            PasswordHash = "AQAAAAIAAYagAAAAEGt4OHsTfv4s31heSnsJpHchMw2NVo+TNRIQX+GaZyWYDLJwE7FkFTPBN5d9WmLPsA==",
+                            Role = "Admin"
+                        },
+                        new
+                        {
+                            UserId = new Guid("22222222-2222-2222-2222-222222222222"),
+                            ContactNo = "9123456780",
+                            CreatedAt = new DateTime(2025, 7, 13, 14, 11, 50, 48, DateTimeKind.Utc).AddTicks(7425),
+                            Email = "reception@hams.com",
+                            IsActive = true,
+                            PasswordHash = "AQAAAAIAAYagAAAAEOqbTLceKnrOUJOch+JXK4dYfnAeUgKKhafhATHjGMViBNEsJazAP5phoz8o0RGcjA==",
+                            Role = "Receptionist"
+                        });
                 });
 
             modelBuilder.Entity("HAMS.Domain.Entities.Doctor", b =>

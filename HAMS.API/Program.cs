@@ -1,5 +1,6 @@
 
 using HAMS.Data;
+using HAMS.Services.Departments;
 using Microsoft.EntityFrameworkCore;
 
 namespace HAMS.API
@@ -14,6 +15,8 @@ namespace HAMS.API
 
             builder.Services.AddControllers();
             builder.Services.AddDbContext<HamsDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("default")));
+
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

@@ -20,7 +20,7 @@ namespace HAMS.Data.Seed
                 new User
                 {
                     UserId = admin.UserId,
-                    Email = "admin@hams.local",
+                    Email = "admin@hams.com",
                     PasswordHash = hasher.HashPassword(admin, "Admin@123"),
                     ContactNo = "9876543210",
                     Role = UserRole.Admin,
@@ -30,7 +30,7 @@ namespace HAMS.Data.Seed
                 new User
                 {
                     UserId = recep.UserId,
-                    Email = "reception@hams.local",
+                    Email = "reception@hams.com",
                     PasswordHash = hasher.HashPassword(admin, "Recep@123"),
                     ContactNo = "9123456780",
                     Role = UserRole.Receptionist,
