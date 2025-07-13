@@ -9,3 +9,4 @@ C:\Users\visha\source\repos\HAMS\HAMS.Domain\obj\Debug\net8.0\HAMS.Domain.dll
 C:\Users\visha\source\repos\HAMS\HAMS.Domain\obj\Debug\net8.0\refint\HAMS.Domain.dll
 C:\Users\visha\source\repos\HAMS\HAMS.Domain\obj\Debug\net8.0\HAMS.Domain.pdb
 C:\Users\visha\source\repos\HAMS\HAMS.Domain\obj\Debug\net8.0\ref\HAMS.Domain.dll
+C:\Users\visha\source\repos\HAMS\HAMS.Domain\obj\Debug\net8.0\HAMS.Domain.sourcelink.json

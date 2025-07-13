@@ -19,9 +19,6 @@ namespace HAMS.Domain.Entities
         [Required, MaxLength(100)]
         public string Description { get; set; }
 
-        [ForeignKey(nameof(DeptHead))]
-        public Guid? DeptHeadId { get; set; }
-        public Doctor DeptHead { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public bool IsActive { get; set; } = true;
         public ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();

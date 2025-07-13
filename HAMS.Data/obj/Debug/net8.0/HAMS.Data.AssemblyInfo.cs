@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HAMS.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8105fe048a872f887afa7cde5f9400e9ec2171b")]
 [assembly: System.Reflection.AssemblyProductAttribute("HAMS.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HAMS.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

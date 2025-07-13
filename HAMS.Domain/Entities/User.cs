@@ -17,7 +17,7 @@ namespace HAMS.Domain.Entities
         public string Email { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
 
         [Required, StringLength(10,MinimumLength=10)]
         public string ContactNo { get; set; }

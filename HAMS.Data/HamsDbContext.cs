@@ -15,6 +15,11 @@ namespace HAMS.Data
 
         }
 
+        protected override void ConfigureConventions(ModelConfigurationBuilder cb)
+        {
+            cb.Properties<Enum>().HaveConversion<string>();
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
