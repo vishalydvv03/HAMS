@@ -11,7 +11,7 @@ namespace HAMS.Domain.Entities
 
         public string DoctorName { get; set; }
         public string Specialization { get; set; }
-        public int DeptartmentId { get; set; }
+        public int DepartmentId { get; set; }
         public Department Department { get; set; }
     } 
 }

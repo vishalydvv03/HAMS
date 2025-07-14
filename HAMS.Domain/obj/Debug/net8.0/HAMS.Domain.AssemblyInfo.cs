@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HAMS.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+15bfa2765d721da900a58c2a2357ee811b5cece5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25341e4226e6aef0285dff07dbedc49f55b9d44d")]
 [assembly: System.Reflection.AssemblyProductAttribute("HAMS.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HAMS.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

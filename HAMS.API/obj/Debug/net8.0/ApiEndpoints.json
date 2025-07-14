@@ -1,5 +1,53 @@
 [
   {
+    "ContainingType": "HAMS.API.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HAMS.Domain.Models.AuthenticationModel.UserLoginModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.AuthController",
+    "Method": "RegisterDoctor",
+    "RelativePath": "api/auth/register/doctor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HAMS.Domain.Models.AuthenticationModel.RegisterDoctorModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.AuthController",
+    "Method": "RegisterPatient",
+    "RelativePath": "api/auth/register/patient",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HAMS.Domain.Models.AuthenticationModel.RegisterPatientModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HAMS.API.Controllers.DepartmentsController",
     "Method": "GetAllDepartments",
     "RelativePath": "api/departments",

@@ -1,17 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 
-namespace HAMS.Domain.Entities
+namespace HAMS.Domain.Models.AuthenticationModel
 {
-    public class Patient
+    public class RegisterPatientModel
     {
-        [Key,ForeignKey(nameof(User))]
-        public Guid PatientId { get; set; }
-        public User User { get; set; }
-
         [Required, MaxLength(100)]
         public string PatientName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+
+        [Required, StringLength(10, MinimumLength = 10)]
+        public string ContactNo { get; set; }
 
         [Required, MaxLength(20)]
         public string Gender { get; set; }

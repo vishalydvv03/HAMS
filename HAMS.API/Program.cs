@@ -1,6 +1,9 @@
 
 using HAMS.Data;
+using HAMS.Domain.Entities;
+using HAMS.Services.Authentication;
 using HAMS.Services.Departments;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace HAMS.API
@@ -15,7 +18,8 @@ namespace HAMS.API
 
             builder.Services.AddControllers();
             builder.Services.AddDbContext<HamsDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("default")));
-
+            builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
