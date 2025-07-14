@@ -145,5 +145,84 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.SchedulesController",
+    "Method": "AddDoctorSchedule",
+    "RelativePath": "api/doctor/schedule",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HAMS.Domain.Models.DoctorScheduleModels.AddDoctorScheduleModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.SchedulesController",
+    "Method": "GetDoctorSchedule",
+    "RelativePath": "api/doctor/schedule/{doctorId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "doctorId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.SchedulesController",
+    "Method": "UpdateDoctorSchedule",
+    "RelativePath": "api/doctor/schedule/{doctorId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "doctorId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "day",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "model",
+        "Type": "HAMS.Domain.Models.DoctorScheduleModels.UpdateDoctorScheduleModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.SchedulesController",
+    "Method": "DeleteDoctorSchedule",
+    "RelativePath": "api/doctor/schedule/{doctorId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "doctorId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "day",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

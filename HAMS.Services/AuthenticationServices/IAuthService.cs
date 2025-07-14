@@ -1,7 +1,7 @@
 ﻿using HAMS.Domain.Models.AuthenticationModel;
 
 
-namespace HAMS.Services.Authentication
+namespace HAMS.Services.AuthenticationServices
 {
     public interface IAuthService
     {

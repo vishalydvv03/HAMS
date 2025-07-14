@@ -1,7 +1,7 @@
 ﻿using HAMS.Data;
 using HAMS.Domain.Models.Department;
 using HAMS.Domain.Models.DepartmentModels;
-using HAMS.Services.Departments;
+using HAMS.Services.DepartmentServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;

@@ -13,5 +13,6 @@ namespace HAMS.Domain.Entities
         public string Specialization { get; set; }
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
+        public ICollection<DoctorSchedule> Schedules { get; set; }
     } 
 }

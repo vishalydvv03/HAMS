@@ -1,5 +1,5 @@
 ﻿using HAMS.Domain.Models.AuthenticationModel;
-using HAMS.Services.Authentication;
+using HAMS.Services.AuthenticationServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

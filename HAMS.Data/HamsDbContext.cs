@@ -30,5 +30,6 @@ namespace HAMS.Data
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<DoctorSchedule> DoctorSchedules { get; set; }
     }
 }

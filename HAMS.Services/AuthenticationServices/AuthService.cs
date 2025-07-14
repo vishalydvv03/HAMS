@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace HAMS.Services.Authentication
+namespace HAMS.Services.AuthenticationServices
 {
     public class AuthService : IAuthService
     {

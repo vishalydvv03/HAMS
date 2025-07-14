@@ -1,10 +1,12 @@
 
 using HAMS.Data;
 using HAMS.Domain.Entities;
-using HAMS.Services.Authentication;
-using HAMS.Services.Departments;
+using HAMS.Services.AuthenticationServices;
+using HAMS.Services.DepartmentServices;
+using HAMS.Services.DoctorScheduleServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace HAMS.API
 {
@@ -16,11 +18,16 @@ namespace HAMS.API
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(o =>
+            {
+                o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            }); 
             builder.Services.AddDbContext<HamsDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("default")));
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

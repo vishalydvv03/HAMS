@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HAMS.Services.Departments
+namespace HAMS.Services.DepartmentServices
 {
     public interface IDepartmentService
     {

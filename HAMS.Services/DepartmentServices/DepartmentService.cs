@@ -6,7 +6,7 @@ using HAMS.Domain.Models.Doctor;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
-namespace HAMS.Services.Departments
+namespace HAMS.Services.DepartmentServices
 {
     public class DepartmentService : IDepartmentService
     {
