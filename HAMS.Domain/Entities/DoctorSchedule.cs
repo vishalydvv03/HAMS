@@ -23,8 +23,8 @@ namespace HAMS.Domain.Entities
         [Required]
         public WeekDay Day { get; set; }
 
-        public TimeOnly? StartTime { get; set; }
-        public TimeOnly? EndTime { get; set; }
+        public TimeSpan? StartTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
 
         [Required]
         public bool IsOnLeave { get; set; } = false;

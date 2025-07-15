@@ -10,24 +10,24 @@ namespace HAMS.API.Controllers
 {
     [Route("api/departments")]
     [ApiController]
-    public class DepartmentsController : ControllerBase
+    public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentService service;
 
-        public DepartmentsController(IDepartmentService service)
+        public DepartmentController(IDepartmentService service)
         {
             this.service = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReadDepartment>>> GetAllDepartments()
+        public async Task<ActionResult<IEnumerable<ReadDepartmentModel>>> GetAllDepartments()
         {
             var data = await service.GetAllDepartmentAsync();
             return Ok(data);
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<ReadDepartment>> GetDepartmentById(int id)
+        public async Task<ActionResult<ReadDepartmentModel>> GetDepartmentById(int id)
         {
             var data = await service.GetDepartmentByIdAsync(id);
             if(data == null)
@@ -38,7 +38,7 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDepartment(AddDepartment dept)
+        public async Task<IActionResult> CreateDepartment(AddDepartmentModel dept)
         {
             var result = await service.AddDepartmentAsync(dept);
             if (result == false)
@@ -49,7 +49,7 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateDepartment(int id, AddDepartment dept)
+        public async Task<IActionResult> UpdateDepartment(int id, AddDepartmentModel dept)
         {
             var result = await service.UpdateDepartmentAsync(id, dept);
             if (result == false)

@@ -8,11 +8,11 @@ namespace HAMS.API.Controllers
 {
     [Route("api/doctor/schedule")]
     [ApiController]
-    public class SchedulesController : ControllerBase
+    public class DoctorScheduleController : ControllerBase
     {
         private readonly IDoctorScheduleService service;
 
-        public SchedulesController(IDoctorScheduleService service)
+        public DoctorScheduleController(IDoctorScheduleService service)
         {
             this.service = service;
         }

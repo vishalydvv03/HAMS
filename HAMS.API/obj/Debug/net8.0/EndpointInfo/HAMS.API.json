@@ -5,6 +5,139 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/appointments": {
+      "post": {
+        "tags": [
+          "Appointment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAppointmentModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAppointmentModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAppointmentModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Optional: admin view of every appointment.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/appointments/{id}/cancel": {
+      "put": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Cancel a scheduled appointment.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/appointments/{id}/reschedule": {
+      "put": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Reschedule a scheduled appointment.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RescheduleAppointmentModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RescheduleAppointmentModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RescheduleAppointmentModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/appointments/{id}/complete": {
+      "put": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Mark a scheduled appointment as completed.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/auth/register/patient": {
       "post": {
         "tags": [
@@ -101,7 +234,7 @@
     "/api/departments": {
       "get": {
         "tags": [
-          "Departments"
+          "Department"
         ],
         "responses": {
           "200": {
@@ -111,7 +244,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReadDepartment"
+                    "$ref": "#/components/schemas/ReadDepartmentModel"
                   }
                 }
               },
@@ -119,7 +252,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReadDepartment"
+                    "$ref": "#/components/schemas/ReadDepartmentModel"
                   }
                 }
               },
@@ -127,7 +260,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReadDepartment"
+                    "$ref": "#/components/schemas/ReadDepartmentModel"
                   }
                 }
               }
@@ -137,23 +270,23 @@
       },
       "post": {
         "tags": [
-          "Departments"
+          "Department"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDepartment"
+                "$ref": "#/components/schemas/AddDepartmentModel"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDepartment"
+                "$ref": "#/components/schemas/AddDepartmentModel"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDepartment"
+                "$ref": "#/components/schemas/AddDepartmentModel"
               }
             }
           }
@@ -168,7 +301,7 @@
     "/api/departments/{id}": {
       "get": {
         "tags": [
-          "Departments"
+          "Department"
         ],
         "parameters": [
           {
@@ -187,17 +320,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReadDepartment"
+                  "$ref": "#/components/schemas/ReadDepartmentModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReadDepartment"
+                  "$ref": "#/components/schemas/ReadDepartmentModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReadDepartment"
+                  "$ref": "#/components/schemas/ReadDepartmentModel"
                 }
               }
             }
@@ -206,7 +339,7 @@
       },
       "put": {
         "tags": [
-          "Departments"
+          "Department"
         ],
         "parameters": [
           {
@@ -223,17 +356,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDepartment"
+                "$ref": "#/components/schemas/AddDepartmentModel"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDepartment"
+                "$ref": "#/components/schemas/AddDepartmentModel"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDepartment"
+                "$ref": "#/components/schemas/AddDepartmentModel"
               }
             }
           }
@@ -246,7 +379,7 @@
       },
       "delete": {
         "tags": [
-          "Departments"
+          "Department"
         ],
         "parameters": [
           {
@@ -266,10 +399,129 @@
         }
       }
     },
+    "/api/Doctor": {
+      "get": {
+        "tags": [
+          "Doctor"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Doctor/{id}": {
+      "get": {
+        "tags": [
+          "Doctor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Doctor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDoctorModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDoctorModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDoctorModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Doctor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Doctor/{doctorId}/appointments": {
+      "get": {
+        "tags": [
+          "Doctor"
+        ],
+        "parameters": [
+          {
+            "name": "doctorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/doctor/schedule/{doctorId}": {
       "get": {
         "tags": [
-          "Schedules"
+          "DoctorSchedule"
         ],
         "parameters": [
           {
@@ -290,7 +542,7 @@
       },
       "put": {
         "tags": [
-          "Schedules"
+          "DoctorSchedule"
         ],
         "parameters": [
           {
@@ -337,7 +589,7 @@
       },
       "delete": {
         "tags": [
-          "Schedules"
+          "DoctorSchedule"
         ],
         "parameters": [
           {
@@ -367,7 +619,7 @@
     "/api/doctor/schedule": {
       "post": {
         "tags": [
-          "Schedules"
+          "DoctorSchedule"
         ],
         "requestBody": {
           "content": {
@@ -394,11 +646,148 @@
           }
         }
       }
+    },
+    "/api/patients": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/patients/{id}": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePatientModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePatientModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePatientModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/patients/{patientId}/appointments": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "AddDepartment": {
+      "AddAppointmentModel": {
+        "type": "object",
+        "properties": {
+          "doctorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddDepartmentModel": {
         "type": "object",
         "properties": {
           "deptName": {
@@ -424,12 +813,12 @@
           },
           "startTime": {
             "type": "string",
-            "format": "time",
+            "format": "date-span",
             "nullable": true
           },
           "endTime": {
             "type": "string",
-            "format": "time",
+            "format": "date-span",
             "nullable": true
           },
           "isOnLeave": {
@@ -438,7 +827,7 @@
         },
         "additionalProperties": false
       },
-      "ReadDepartment": {
+      "ReadDepartmentModel": {
         "type": "object",
         "properties": {
           "departmentId": {
@@ -456,14 +845,14 @@
           "doctors": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ReadDoctor"
+              "$ref": "#/components/schemas/ReadDoctorModel"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "ReadDoctor": {
+      "ReadDoctorModel": {
         "type": "object",
         "properties": {
           "doctorId": {
@@ -571,21 +960,91 @@
         },
         "additionalProperties": false
       },
+      "RescheduleAppointmentModel": {
+        "type": "object",
+        "properties": {
+          "newTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateDoctorModel": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "specialization": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "contact": {
+            "type": "string",
+            "nullable": true
+          },
+          "departmentId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "UpdateDoctorScheduleModel": {
         "type": "object",
         "properties": {
           "startTime": {
             "type": "string",
-            "format": "time",
+            "format": "date-span",
             "nullable": true
           },
           "endTime": {
             "type": "string",
-            "format": "time",
+            "format": "date-span",
             "nullable": true
           },
           "isOnLeave": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdatePatientModel": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date"
+          },
+          "mobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "bloodGroup": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

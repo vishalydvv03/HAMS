@@ -154,3 +154,5 @@ C:\Users\visha\source\repos\HAMS\HAMS.API\obj\Debug\net8.0\HAMS.API.MvcApplicati
 C:\Users\visha\source\repos\HAMS\HAMS.API\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\visha\source\repos\HAMS\HAMS.API\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\visha\source\repos\HAMS\HAMS.API\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\visha\source\repos\HAMS\HAMS.API\bin\Debug\net8.0\HAMS.API.xml
+C:\Users\visha\source\repos\HAMS\HAMS.API\obj\Debug\net8.0\HAMS.API.xml

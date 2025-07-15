@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HAMS.Domain.Models.Doctor
+namespace HAMS.Domain.Models.AppointmentModels
 {
-    public class ReadDoctor
+    public class ReadAppointmentByPatientModel
     {
-        public Guid DoctorId { get; set; }
         public string DoctorName { get; set; }
-        public string Specialization { get; set; }
-
+        public DateTime AppointmentDate { get; set; }
     }
 }

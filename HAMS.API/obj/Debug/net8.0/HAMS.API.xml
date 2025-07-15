@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HAMS.API</name>
+    </assembly>
+    <members>
+        <member name="M:HAMS.API.Controllers.AppointmentController.Cancel(System.Int32)">
+            <summary>Cancel a scheduled appointment.</summary>
+        </member>
+        <member name="M:HAMS.API.Controllers.AppointmentController.Reschedule(System.Int32,HAMS.Domain.Models.AppointmentModels.RescheduleAppointmentModel)">
+            <summary>Reschedule a scheduled appointment.</summary>
+        </member>
+        <member name="M:HAMS.API.Controllers.AppointmentController.Complete(System.Int32)">
+            <summary>Mark a scheduled appointment as completed.</summary>
+        </member>
+        <member name="M:HAMS.API.Controllers.AppointmentController.GetAllAppointments">
+            <summary>Optional: admin view of every appointment.</summary>
+        </member>
+    </members>
+</doc>

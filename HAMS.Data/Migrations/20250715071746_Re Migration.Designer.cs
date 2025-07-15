@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HAMS.Data.Migrations
 {
     [DbContext(typeof(HamsDbContext))]
-    [Migration("20250714160906_Add Authentication")]
-    partial class AddAuthentication
+    [Migration("20250715071746_Re Migration")]
+    partial class ReMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,36 @@ namespace HAMS.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("HAMS.Domain.Entities.Appointment", b =>
+                {
+                    b.Property<int>("AppointmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"));
+
+                    b.Property<DateTime>("AppointmentTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AppointmentId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Appointments");
+                });
 
             modelBuilder.Entity("HAMS.Domain.Entities.Department", b =>
                 {
@@ -56,7 +86,7 @@ namespace HAMS.Data.Migrations
                         new
                         {
                             DepartmentId = 1,
-                            CreatedAt = new DateTime(2025, 7, 14, 16, 9, 5, 558, DateTimeKind.Utc).AddTicks(9297),
+                            CreatedAt = new DateTime(2025, 7, 15, 7, 17, 45, 648, DateTimeKind.Utc).AddTicks(2596),
                             DeptName = "Cardiology",
                             Description = "Heart & vascular care",
                             IsActive = true
@@ -64,7 +94,7 @@ namespace HAMS.Data.Migrations
                         new
                         {
                             DepartmentId = 2,
-                            CreatedAt = new DateTime(2025, 7, 14, 16, 9, 5, 558, DateTimeKind.Utc).AddTicks(9300),
+                            CreatedAt = new DateTime(2025, 7, 15, 7, 17, 45, 648, DateTimeKind.Utc).AddTicks(2598),
                             DeptName = "Orthopedics",
                             Description = "Bones, joints & spine",
                             IsActive = true
@@ -72,7 +102,7 @@ namespace HAMS.Data.Migrations
                         new
                         {
                             DepartmentId = 3,
-                            CreatedAt = new DateTime(2025, 7, 14, 16, 9, 5, 558, DateTimeKind.Utc).AddTicks(9301),
+                            CreatedAt = new DateTime(2025, 7, 15, 7, 17, 45, 648, DateTimeKind.Utc).AddTicks(2599),
                             DeptName = "Dermatology",
                             Description = "Skin & hair",
                             IsActive = true
@@ -100,6 +130,37 @@ namespace HAMS.Data.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Doctors");
+                });
+
+            modelBuilder.Entity("HAMS.Domain.Entities.DoctorSchedule", b =>
+                {
+                    b.Property<int>("ScheduleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleId"));
+
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<TimeSpan?>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<bool>("IsOnLeave")
+                        .HasColumnType("bit");
+
+                    b.Property<TimeSpan?>("StartTime")
+                        .HasColumnType("time");
+
+                    b.HasKey("ScheduleId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("DoctorSchedules");
                 });
 
             modelBuilder.Entity("HAMS.Domain.Entities.Patient", b =>
@@ -173,22 +234,41 @@ namespace HAMS.Data.Migrations
                         {
                             UserId = new Guid("11111111-1111-1111-1111-111111111111"),
                             ContactNo = "9876543210",
-                            CreatedAt = new DateTime(2025, 7, 14, 16, 9, 5, 618, DateTimeKind.Utc).AddTicks(2542),
+                            CreatedAt = new DateTime(2025, 7, 15, 7, 17, 45, 704, DateTimeKind.Utc).AddTicks(4208),
                             Email = "admin@hams.com",
                             IsActive = true,
-                            PasswordHash = "AQAAAAIAAYagAAAAEAHEx6HNXqAZ507XAxgdcSORyPpckiuviXhgibklF5vepo6vtdzAjOJoVMXVr0TbGQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEO2xRC5/5dniXvkhbxSY8JU31nQHQeg5psnki/I2Y2N6iazDAtdhW0aaszLl1xEoKQ==",
                             Role = "Admin"
                         },
                         new
                         {
                             UserId = new Guid("22222222-2222-2222-2222-222222222222"),
                             ContactNo = "9123456780",
-                            CreatedAt = new DateTime(2025, 7, 14, 16, 9, 5, 674, DateTimeKind.Utc).AddTicks(2513),
+                            CreatedAt = new DateTime(2025, 7, 15, 7, 17, 45, 767, DateTimeKind.Utc).AddTicks(3548),
                             Email = "reception@hams.com",
                             IsActive = true,
-                            PasswordHash = "AQAAAAIAAYagAAAAEPmV2LDv/rHR6si2iFiYC8vT7yymq9uga04GHlzbUjpe0RJV9uwg39efswCgWTHroQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKwqXlR/7OM6KEPjVoyXtCHg9w5aricNiYI7khOZCdLiSctTRJjsk7lXIQoqbbiTTQ==",
                             Role = "Receptionist"
                         });
+                });
+
+            modelBuilder.Entity("HAMS.Domain.Entities.Appointment", b =>
+                {
+                    b.HasOne("HAMS.Domain.Entities.Doctor", "Doctor")
+                        .WithMany("Appointments")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("HAMS.Domain.Entities.Patient", "Patient")
+                        .WithMany("Appointments")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("HAMS.Domain.Entities.Doctor", b =>
@@ -210,6 +290,17 @@ namespace HAMS.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("HAMS.Domain.Entities.DoctorSchedule", b =>
+                {
+                    b.HasOne("HAMS.Domain.Entities.Doctor", "Doctor")
+                        .WithMany("Schedules")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+                });
+
             modelBuilder.Entity("HAMS.Domain.Entities.Patient", b =>
                 {
                     b.HasOne("HAMS.Domain.Entities.User", "User")
@@ -224,6 +315,18 @@ namespace HAMS.Data.Migrations
             modelBuilder.Entity("HAMS.Domain.Entities.Department", b =>
                 {
                     b.Navigation("Doctors");
+                });
+
+            modelBuilder.Entity("HAMS.Domain.Entities.Doctor", b =>
+                {
+                    b.Navigation("Appointments");
+
+                    b.Navigation("Schedules");
+                });
+
+            modelBuilder.Entity("HAMS.Domain.Entities.Patient", b =>
+                {
+                    b.Navigation("Appointments");
                 });
 
             modelBuilder.Entity("HAMS.Domain.Entities.User", b =>

@@ -22,5 +22,7 @@ namespace HAMS.Domain.Entities
         [Required, MaxLength(50)]
         public string Address { get; set; }
         public DateOnly DOB { get; set; }
+
+        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
     }
 }

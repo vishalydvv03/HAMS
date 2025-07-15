@@ -11,8 +11,8 @@ namespace HAMS.Domain.Models.DoctorScheduleModels
     {
         public Guid DoctorId { get; set; }
         public WeekDay Day { get; set; }
-        public TimeOnly? StartTime { get; set; }
-        public TimeOnly? EndTime { get; set; }
+        public TimeSpan? StartTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
         public bool IsOnLeave { get; set; }
     }
 }
