@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace HAMS.Domain.Models.AppointmentModels
 {
-    public class ReadAppointmentByDoctorModel
+    public class AddAppointment
     {
-        public string PatientName { get; set; }
-        public DateTime AppointmentDate { get; set; }
+        public Guid DoctorId { get; set; }
+        public Guid PatientId { get; set; }
+        public DateTime AppointmentTime { get; set; }   
     }
 }

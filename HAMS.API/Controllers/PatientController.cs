@@ -36,7 +36,7 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPut("{id:Guid}")]
-        public async Task<IActionResult> Update(Guid id, UpdatePatientModel model)
+        public async Task<IActionResult> Update(Guid id, UpdatePatient model)
         {
             var updated = await service.UpdateAsync(id, model);
             if (!updated) 
@@ -61,6 +61,13 @@ namespace HAMS.API.Controllers
         public async Task<IActionResult> GetAppointments(Guid patientId)
         {
             var data = await service.GetAppointmentByPatientAsync(patientId);
+            return Ok(data);
+        }
+
+        [HttpGet("{patientId:guid}/medical-records")]
+        public async Task<IActionResult> GetMedicalRecords(Guid patientId)
+        {
+            var data = await service.GetRecordsForPatientAsync(patientId);
             return Ok(data);
         }
     }

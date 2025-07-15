@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "HAMS.Domain.Models.AppointmentModels.AddAppointmentModel",
+        "Type": "HAMS.Domain.Models.AppointmentModels.AddAppointment",
         "IsRequired": true
       }
     ],
@@ -72,7 +72,7 @@
       },
       {
         "Name": "model",
-        "Type": "HAMS.Domain.Models.AppointmentModels.RescheduleAppointmentModel",
+        "Type": "HAMS.Domain.Models.AppointmentModels.RescheduleAppointment",
         "IsRequired": true
       }
     ],
@@ -88,7 +88,7 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "HAMS.Domain.Models.AuthenticationModel.UserLoginModel",
+        "Type": "HAMS.Domain.Models.AuthenticationModel.UserLogin",
         "IsRequired": true
       }
     ],
@@ -104,7 +104,7 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "HAMS.Domain.Models.AuthenticationModel.RegisterDoctorModel",
+        "Type": "HAMS.Domain.Models.AuthenticationModel.RegisterDoctor",
         "IsRequired": true
       }
     ],
@@ -120,7 +120,7 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "HAMS.Domain.Models.AuthenticationModel.RegisterPatientModel",
+        "Type": "HAMS.Domain.Models.AuthenticationModel.RegisterPatient",
         "IsRequired": true
       }
     ],
@@ -136,7 +136,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[HAMS.Domain.Models.Department.ReadDepartmentModel, HAMS.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[HAMS.Domain.Models.Department.ReadDepartment, HAMS.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -156,7 +156,7 @@
     "Parameters": [
       {
         "Name": "dept",
-        "Type": "HAMS.Domain.Models.DepartmentModels.AddDepartmentModel",
+        "Type": "HAMS.Domain.Models.DepartmentModels.AddDepartment",
         "IsRequired": true
       }
     ],
@@ -178,7 +178,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "HAMS.Domain.Models.Department.ReadDepartmentModel",
+        "Type": "HAMS.Domain.Models.Department.ReadDepartment",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -203,7 +203,7 @@
       },
       {
         "Name": "dept",
-        "Type": "HAMS.Domain.Models.DepartmentModels.AddDepartmentModel",
+        "Type": "HAMS.Domain.Models.DepartmentModels.AddDepartment",
         "IsRequired": true
       }
     ],
@@ -282,7 +282,7 @@
       },
       {
         "Name": "model",
-        "Type": "HAMS.Domain.Models.DoctorModels.UpdateDoctorModel",
+        "Type": "HAMS.Domain.Models.DoctorModels.UpdateDoctor",
         "IsRequired": true
       }
     ],
@@ -314,7 +314,7 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "HAMS.Domain.Models.DoctorScheduleModels.AddDoctorScheduleModel",
+        "Type": "HAMS.Domain.Models.DoctorScheduleModels.AddDoctorSchedule",
         "IsRequired": true
       }
     ],
@@ -356,7 +356,7 @@
       },
       {
         "Name": "model",
-        "Type": "HAMS.Domain.Models.DoctorScheduleModels.UpdateDoctorScheduleModel",
+        "Type": "HAMS.Domain.Models.DoctorScheduleModels.UpdateDoctorSchedule",
         "IsRequired": true
       }
     ],
@@ -379,6 +379,69 @@
         "Name": "day",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.MedicalRecordController",
+    "Method": "AddRecord",
+    "RelativePath": "api/medical-records",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HAMS.Domain.Models.MedicalRecordModels.AddMedicalRecord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.MedicalRecordController",
+    "Method": "GetAll",
+    "RelativePath": "api/medical-records",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.MedicalRecordController",
+    "Method": "Update",
+    "RelativePath": "api/medical-records/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "model",
+        "Type": "HAMS.Domain.Models.MedicalRecordModels.UpdateMedicalRecord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.MedicalRecordController",
+    "Method": "Delete",
+    "RelativePath": "api/medical-records/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -424,7 +487,7 @@
       },
       {
         "Name": "model",
-        "Type": "HAMS.Domain.Models.PatientModels.UpdatePatientModel",
+        "Type": "HAMS.Domain.Models.PatientModels.UpdatePatient",
         "IsRequired": true
       }
     ],
@@ -450,6 +513,22 @@
     "ContainingType": "HAMS.API.Controllers.PatientController",
     "Method": "GetAppointments",
     "RelativePath": "api/patients/{patientId}/appointments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.PatientController",
+    "Method": "GetMedicalRecords",
+    "RelativePath": "api/patients/{patientId}/medical-records",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

@@ -19,7 +19,7 @@ namespace HAMS.Services.AuthenticationServices
             this.hasher = hasher;
         }
 
-        public async Task<bool> RegisterPatientAsync(RegisterPatientModel model)
+        public async Task<bool> RegisterPatientAsync(RegisterPatient model)
         {
             var userExists = await context.Users.AnyAsync(u => u.Email == model.Email || u.ContactNo == model.ContactNo);
             if (userExists)
@@ -54,7 +54,7 @@ namespace HAMS.Services.AuthenticationServices
             await context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> RegisterDoctorAsync(RegisterDoctorModel model)
+        public async Task<bool> RegisterDoctorAsync(RegisterDoctor model)
         {
             var userExists = await context.Users.AnyAsync(u => u.Email == model.Email || u.ContactNo == model.ContactNo);
             if (userExists)
@@ -92,7 +92,7 @@ namespace HAMS.Services.AuthenticationServices
             await context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> ValidateCredentialsAsync(UserLoginModel model)
+        public async Task<bool> ValidateCredentialsAsync(UserLogin model)
         {
             var user = await context.Users.SingleOrDefaultAsync(u => u.Email == model.Email);
             if (user == null)

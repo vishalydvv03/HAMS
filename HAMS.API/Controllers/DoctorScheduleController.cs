@@ -26,7 +26,7 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDoctorSchedule([FromBody] AddDoctorScheduleModel model)
+        public async Task<IActionResult> AddDoctorSchedule([FromBody] AddDoctorSchedule model)
         {
             var added = await service.AddScheduleAsync(model);
             if (!added)
@@ -37,7 +37,7 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPut("{doctorId}")]
-        public async Task<IActionResult> UpdateDoctorSchedule(Guid doctorId, [FromQuery] WeekDay day, [FromBody] UpdateDoctorScheduleModel model)
+        public async Task<IActionResult> UpdateDoctorSchedule(Guid doctorId, [FromQuery] WeekDay day, [FromBody] UpdateDoctorSchedule model)
         {
             var updated = await service.UpdateScheduleAsync(doctorId, day, model);
             if (!updated)

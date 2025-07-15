@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HAMS.Domain.Models.DoctorScheduleModels
 {
-    public class AddDoctorScheduleModel
+    public class AddDoctorSchedule
     {
         public Guid DoctorId { get; set; }
         public WeekDay Day { get; set; }

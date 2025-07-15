@@ -17,7 +17,7 @@ namespace HAMS.API.Controllers
         } 
 
         [HttpPost("register/patient")]
-        public async Task<IActionResult> RegisterPatient(RegisterPatientModel model)
+        public async Task<IActionResult> RegisterPatient(RegisterPatient model)
         {
             var result = await service.RegisterPatientAsync(model);
             if (result == false)
@@ -30,7 +30,7 @@ namespace HAMS.API.Controllers
             
 
         [HttpPost("register/doctor")]
-        public async Task<IActionResult> RegisterDoctor(RegisterDoctorModel model)
+        public async Task<IActionResult> RegisterDoctor(RegisterDoctor model)
         {
             var result = await service.RegisterDoctorAsync(model);
             if (result == false)
@@ -43,7 +43,7 @@ namespace HAMS.API.Controllers
             
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserLoginModel model)
+        public async Task<IActionResult> Login(UserLogin model)
         {
             var result= await service.ValidateCredentialsAsync(model);
 

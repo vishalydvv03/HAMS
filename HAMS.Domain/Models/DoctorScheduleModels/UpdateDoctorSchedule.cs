@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HAMS.Domain.Models.DoctorScheduleModels
 {
-    public class UpdateDoctorScheduleModel
+    public class UpdateDoctorSchedule
     {
         public TimeSpan? StartTime { get; set; }
         public TimeSpan? EndTime { get; set; }

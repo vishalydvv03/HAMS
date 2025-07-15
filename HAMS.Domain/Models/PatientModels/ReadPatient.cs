@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace HAMS.Domain.Models.PatientModels
 {
-    public class UpdatePatientModel
+    public class ReadPatient
     {
+        public Guid PatientId { get; set; }
         public string Name { get; set; }
         public string Gender { get; set; }
         public DateOnly DateOfBirth { get; set; }
@@ -15,6 +16,5 @@ namespace HAMS.Domain.Models.PatientModels
         public string Email { get; set; }
         public string BloodGroup { get; set; }
         public string Address { get; set; }
-
     }
 }

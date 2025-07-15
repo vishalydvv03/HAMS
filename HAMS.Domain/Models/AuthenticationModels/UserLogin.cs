@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HAMS.Domain.Models.AuthenticationModel
 {
-    public class UserLoginModel
+    public class UserLogin
     {
         [EmailAddress, Required]
         public string Email { get; set; }

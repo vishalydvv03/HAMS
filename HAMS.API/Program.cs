@@ -6,6 +6,7 @@ using HAMS.Services.AuthenticationServices;
 using HAMS.Services.DepartmentServices;
 using HAMS.Services.DoctorScheduleServices;
 using HAMS.Services.DoctorServices;
+using HAMS.Services.MedicalRecordServices;
 using HAMS.Services.PatientServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,7 @@ namespace HAMS.API
             builder.Services.AddScoped<IAppointmentService, AppointmentService>();
             builder.Services.AddScoped<IPatientService, PatientService>();
             builder.Services.AddScoped<IDoctorService, DoctorService>();
+            builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>

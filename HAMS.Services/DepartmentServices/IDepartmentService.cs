@@ -11,10 +11,10 @@ namespace HAMS.Services.DepartmentServices
 {
     public interface IDepartmentService
     {
-        Task<IEnumerable<ReadDepartmentModel>> GetAllDepartmentAsync();
-        Task<ReadDepartmentModel> GetDepartmentByIdAsync(int id);
-        Task<bool> AddDepartmentAsync(AddDepartmentModel dept);
-        Task<bool> UpdateDepartmentAsync(int id, AddDepartmentModel dept);
+        Task<IEnumerable<ReadDepartment>> GetAllDepartmentAsync();
+        Task<ReadDepartment> GetDepartmentByIdAsync(int id);
+        Task<bool> AddDepartmentAsync(AddDepartment dept);
+        Task<bool> UpdateDepartmentAsync(int id, AddDepartment dept);
         Task<bool> DeleteDepartmentAsync(int id);
 
     }

@@ -19,10 +19,10 @@ namespace HAMS.Services.DoctorServices
             this.context = context;
         }
 
-        public async Task<List<DoctorDetailsModel>> GetAllAsync()
+        public async Task<List<DoctorDetails>> GetAllAsync()
         {
             var data= await context.Doctors.Include(d => d.Department).Where(x => x.User.IsActive)
-                .Select(d => new DoctorDetailsModel
+                .Select(d => new DoctorDetails
                 {
                     DoctorId = d.DoctorId,
                     Name = d.DoctorName,
@@ -35,7 +35,7 @@ namespace HAMS.Services.DoctorServices
             return data;
         }
 
-        public async Task<DoctorDetailsModel> GetByIdAsync(Guid id)
+        public async Task<DoctorDetails> GetByIdAsync(Guid id)
         {
             var doc = await context.Doctors.Include(d => d.Department).FirstOrDefaultAsync(d => d.DoctorId == id && d.User.IsActive);
 
@@ -44,7 +44,7 @@ namespace HAMS.Services.DoctorServices
                 return null;
             } 
 
-            return new DoctorDetailsModel
+            return new DoctorDetails
             {
                 DoctorId = doc.DoctorId,
                 Name = doc.DoctorName,
@@ -55,7 +55,7 @@ namespace HAMS.Services.DoctorServices
             };
         }
 
-        public async Task<bool> UpdateAsync(Guid id, UpdateDoctorModel model)
+        public async Task<bool> UpdateAsync(Guid id, UpdateDoctor model)
         {
             var doctor = await context.Doctors.FirstOrDefaultAsync(d => d.DoctorId == id && d.User.IsActive);
             if (doctor == null)
@@ -83,11 +83,11 @@ namespace HAMS.Services.DoctorServices
             await context.SaveChangesAsync();
             return true;
         }
-        public async Task<IEnumerable<ReadAppointmentByDoctorModel>> GetAppointmentByDoctorAsync(Guid docId)
+        public async Task<IEnumerable<ReadAppointmentByDoctor>> GetAppointmentByDoctorAsync(Guid docId)
         {
             var data = await context.Appointments
                         .Where(a => a.DoctorId == docId && a.Doctor.User.IsActive)
-                        .Select(x => new ReadAppointmentByDoctorModel()
+                        .Select(x => new ReadAppointmentByDoctor()
                         {
                             PatientName = x.Patient.PatientName,
                             AppointmentDate = x.AppointmentTime

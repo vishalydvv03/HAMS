@@ -9,10 +9,10 @@ namespace HAMS.Services.AppointmentServices
 {
     public interface IAppointmentService
     {
-        Task<bool> BookAsync(AddAppointmentModel model);
+        Task<bool> BookAsync(AddAppointment model);
         Task<bool> CancelAsync(int appointmentId);
-        Task<bool> RescheduleAsync(int appointmentId, RescheduleAppointmentModel model);
+        Task<bool> RescheduleAsync(int appointmentId, RescheduleAppointment model);
         Task<bool> CompleteAsync(int appointmentId);
-        Task<IEnumerable<ReadAppointmentModel>> GetAllAppointmentsAsync();
+        Task<IEnumerable<ReadAppointment>> GetAllAppointmentsAsync();
     }
 }

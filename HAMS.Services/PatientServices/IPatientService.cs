@@ -1,4 +1,5 @@
 ﻿using HAMS.Domain.Models.AppointmentModels;
+using HAMS.Domain.Models.MedicalRecordModels;
 using HAMS.Domain.Models.PatientModels;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,11 @@ namespace HAMS.Services.PatientServices
 {
     public interface IPatientService
     {
-        Task<List<ReadPatientModel>> GetAllAsync();
-        Task<ReadPatientModel> GetByIdAsync(Guid id);
-        Task<bool> UpdateAsync(Guid id, UpdatePatientModel model);
+        Task<List<ReadPatient>> GetAllAsync();
+        Task<ReadPatient> GetByIdAsync(Guid id);
+        Task<bool> UpdateAsync(Guid id, UpdatePatient model);
         Task<bool> DeleteAsync(Guid id);
-        Task<IEnumerable<ReadAppointmentByPatientModel>> GetAppointmentByPatientAsync(Guid patId);
+        Task<IEnumerable<ReadAppointmentByPatient>> GetAppointmentByPatientAsync(Guid patId);
+        Task<IEnumerable<ReadMedicalRecordByPatient>> GetRecordsForPatientAsync(Guid patId);
     }
 }

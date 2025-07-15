@@ -20,14 +20,14 @@ namespace HAMS.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReadDepartmentModel>>> GetAllDepartments()
+        public async Task<ActionResult<IEnumerable<ReadDepartment>>> GetAllDepartments()
         {
             var data = await service.GetAllDepartmentAsync();
             return Ok(data);
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<ReadDepartmentModel>> GetDepartmentById(int id)
+        public async Task<ActionResult<ReadDepartment>> GetDepartmentById(int id)
         {
             var data = await service.GetDepartmentByIdAsync(id);
             if(data == null)
@@ -38,7 +38,7 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDepartment(AddDepartmentModel dept)
+        public async Task<IActionResult> CreateDepartment(AddDepartment dept)
         {
             var result = await service.AddDepartmentAsync(dept);
             if (result == false)
@@ -49,7 +49,7 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateDepartment(int id, AddDepartmentModel dept)
+        public async Task<IActionResult> UpdateDepartment(int id, AddDepartment dept)
         {
             var result = await service.UpdateDepartmentAsync(id, dept);
             if (result == false)

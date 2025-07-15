@@ -16,14 +16,14 @@ namespace HAMS.Services.DepartmentServices
             this.context = context;
         }
 
-        public async Task<IEnumerable<ReadDepartmentModel>> GetAllDepartmentAsync()
+        public async Task<IEnumerable<ReadDepartment>> GetAllDepartmentAsync()
         {
-            var data = await context.Departments.AsNoTracking().Where(x=>x.IsActive).Select(x=>new ReadDepartmentModel()
+            var data = await context.Departments.AsNoTracking().Where(x=>x.IsActive).Select(x=>new ReadDepartment()
             {
                 DepartmentId = x.DepartmentId,
                 DeptName = x.DeptName,
                 Description = x.Description,
-                Doctors = x.Doctors.Select(d => new ReadDoctorModel()
+                Doctors = x.Doctors.Select(d => new ReadDoctor()
                 {
                     DoctorId = d.DoctorId,
                     DoctorName = d.DoctorName,
@@ -32,18 +32,18 @@ namespace HAMS.Services.DepartmentServices
             }).ToListAsync();
             return data;
         }
-        public async Task<ReadDepartmentModel?> GetDepartmentByIdAsync(int id)
+        public async Task<ReadDepartment?> GetDepartmentByIdAsync(int id)
         {
             var data = await context.Departments.FirstOrDefaultAsync(x=>x.DepartmentId==id && x.IsActive);
 
             if (data!=null)
             {
-                var dept = new ReadDepartmentModel()
+                var dept = new ReadDepartment()
                 {
                     DepartmentId = data.DepartmentId,
                     DeptName = data.DeptName,
                     Description = data.Description,
-                    Doctors = data.Doctors.Select(d => new ReadDoctorModel()
+                    Doctors = data.Doctors.Select(d => new ReadDoctor()
                     {
                         DoctorId = d.DoctorId,
                         DoctorName = d.DoctorName,
@@ -54,7 +54,7 @@ namespace HAMS.Services.DepartmentServices
             }
             return null;
         }
-        public async Task<bool> AddDepartmentAsync(AddDepartmentModel dept)
+        public async Task<bool> AddDepartmentAsync(AddDepartment dept)
         {
             var deptExists = await context.Departments.AnyAsync(d => dept.DeptName == d.DeptName);
             if (!deptExists)
@@ -72,7 +72,7 @@ namespace HAMS.Services.DepartmentServices
             }
             return false;
         }
-        public async Task<bool> UpdateDepartmentAsync(int id, AddDepartmentModel dept)
+        public async Task<bool> UpdateDepartmentAsync(int id, AddDepartment dept)
         {
             var entity = await context.Departments.FirstOrDefaultAsync(x=>x.DepartmentId==id && x.IsActive);
             if (entity != null)

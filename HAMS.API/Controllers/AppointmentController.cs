@@ -17,7 +17,7 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> BookAppointment(AddAppointmentModel model)
+        public async Task<IActionResult> BookAppointment(AddAppointment model)
         {
             var result = await service.BookAsync(model);
 
@@ -29,7 +29,6 @@ namespace HAMS.API.Controllers
             return Ok("Appointment Booked Successfully");
         }
 
-        /// <summary>Cancel a scheduled appointment.</summary>
         [HttpPut("{id:int}/cancel")]
         public async Task<IActionResult> Cancel(int id)
         {
@@ -43,7 +42,7 @@ namespace HAMS.API.Controllers
         }
             
         [HttpPut("{id:int}/reschedule")]
-        public async Task<IActionResult> Reschedule(int id, RescheduleAppointmentModel model)
+        public async Task<IActionResult> Reschedule(int id, RescheduleAppointment model)
         {
             var result = await service.RescheduleAsync(id, model);
             if (!result)

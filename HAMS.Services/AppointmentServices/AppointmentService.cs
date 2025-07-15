@@ -14,7 +14,7 @@ namespace HAMS.Services.AppointmentServices
         {
             this.context = context;
         }
-        public async Task<bool> BookAsync(AddAppointmentModel model)
+        public async Task<bool> BookAsync(AddAppointment model)
         {
             var dt = model.AppointmentTime;
             var day = (WeekDay)dt.DayOfWeek;
@@ -63,14 +63,14 @@ namespace HAMS.Services.AppointmentServices
             await context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> RescheduleAsync(int id, RescheduleAppointmentModel model)
+        public async Task<bool> RescheduleAsync(int id, RescheduleAppointment model)
         {
             var current = await context.Appointments.FindAsync(id);
             if (current == null || current.Status != AppointmentStatus.Scheduled) 
             { 
                 return false;
             } 
-            var add = await BookAsync(new AddAppointmentModel
+            var add = await BookAsync(new AddAppointment
             {
                 DoctorId = current.DoctorId,
                 PatientId = current.PatientId,
@@ -97,10 +97,10 @@ namespace HAMS.Services.AppointmentServices
             await context.SaveChangesAsync();
             return true;
         }
-        public async Task<IEnumerable<ReadAppointmentModel>> GetAllAppointmentsAsync()
+        public async Task<IEnumerable<ReadAppointment>> GetAllAppointmentsAsync()
         {
             var data = await context.Appointments
-                        .Select(x => new ReadAppointmentModel()
+                        .Select(x => new ReadAppointment()
                         {
                             PatientName = x.Patient.PatientName,
                             DoctorName = x.Doctor.DoctorName,

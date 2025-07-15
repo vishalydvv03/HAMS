@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace HAMS.Domain.Models.DoctorModels
 {
-    public class UpdateDoctorModel
+    public class DoctorDetails
     {
+        public Guid DoctorId { get; set; }
         public string Name { get; set; }
         public string Specialization { get; set; }
         public string Email { get; set; }
         public string Contact { get; set; }
-        public int DepartmentId { get; set; } 
-        
+        public string DepartmentName { get; set; }
     }
 }

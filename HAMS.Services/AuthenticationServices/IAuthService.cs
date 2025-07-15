@@ -5,8 +5,8 @@ namespace HAMS.Services.AuthenticationServices
 {
     public interface IAuthService
     {
-        Task<bool> RegisterPatientAsync(RegisterPatientModel model);
-        Task<bool> RegisterDoctorAsync(RegisterDoctorModel model);
-        Task<bool> ValidateCredentialsAsync(UserLoginModel model);
+        Task<bool> RegisterPatientAsync(RegisterPatient model);
+        Task<bool> RegisterDoctorAsync(RegisterDoctor model);
+        Task<bool> ValidateCredentialsAsync(UserLogin model);
     }
 }

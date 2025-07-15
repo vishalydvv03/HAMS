@@ -11,10 +11,10 @@ namespace HAMS.Services.DoctorServices
 {
     public interface IDoctorService
     {
-        Task<List<DoctorDetailsModel>> GetAllAsync();
-        Task<DoctorDetailsModel> GetByIdAsync(Guid id);
-        Task<bool> UpdateAsync(Guid id, UpdateDoctorModel model);
+        Task<List<DoctorDetails>> GetAllAsync();
+        Task<DoctorDetails> GetByIdAsync(Guid id);
+        Task<bool> UpdateAsync(Guid id, UpdateDoctor model);
         Task<bool> DeleteAsync(Guid id);
-        Task<IEnumerable<ReadAppointmentByDoctorModel>> GetAppointmentByDoctorAsync(Guid docId);
+        Task<IEnumerable<ReadAppointmentByDoctor>> GetAppointmentByDoctorAsync(Guid docId);
     }
 }

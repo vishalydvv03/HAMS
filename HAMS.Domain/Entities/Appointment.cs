@@ -32,5 +32,7 @@ namespace HAMS.Domain.Entities
         [Required]
         public AppointmentStatus Status { get; set; } = AppointmentStatus.Scheduled;
 
+        public MedicalRecord MedicalRecord { get; set; }
+
     }
 }

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HAMS.Domain.Models.Department
 {
-    public class ReadDepartmentModel
+    public class ReadDepartment
     {
         public int DepartmentId { get; set; }
         public string DeptName { get; set; }
         public string Description { get; set; }
-        public ICollection<ReadDoctorModel> Doctors { get; set; } = new List<ReadDoctorModel>();
+        public ICollection<ReadDoctor> Doctors { get; set; } = new List<ReadDoctor>();
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HAMS.Domain.Models.Doctor
 {
-    public class ReadDoctorModel
+    public class ReadDoctor
     {
         public Guid DoctorId { get; set; }
         public string DoctorName { get; set; }

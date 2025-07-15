@@ -14,17 +14,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddAppointmentModel"
+                "$ref": "#/components/schemas/AddAppointment"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddAppointmentModel"
+                "$ref": "#/components/schemas/AddAppointment"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddAppointmentModel"
+                "$ref": "#/components/schemas/AddAppointment"
               }
             }
           }
@@ -39,7 +39,6 @@
         "tags": [
           "Appointment"
         ],
-        "summary": "Optional: admin view of every appointment.",
         "responses": {
           "200": {
             "description": "OK"
@@ -76,7 +75,6 @@
         "tags": [
           "Appointment"
         ],
-        "summary": "Reschedule a scheduled appointment.",
         "parameters": [
           {
             "name": "id",
@@ -92,17 +90,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RescheduleAppointmentModel"
+                "$ref": "#/components/schemas/RescheduleAppointment"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RescheduleAppointmentModel"
+                "$ref": "#/components/schemas/RescheduleAppointment"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RescheduleAppointmentModel"
+                "$ref": "#/components/schemas/RescheduleAppointment"
               }
             }
           }
@@ -119,7 +117,6 @@
         "tags": [
           "Appointment"
         ],
-        "summary": "Mark a scheduled appointment as completed.",
         "parameters": [
           {
             "name": "id",
@@ -147,17 +144,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterPatientModel"
+                "$ref": "#/components/schemas/RegisterPatient"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterPatientModel"
+                "$ref": "#/components/schemas/RegisterPatient"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterPatientModel"
+                "$ref": "#/components/schemas/RegisterPatient"
               }
             }
           }
@@ -178,17 +175,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterDoctorModel"
+                "$ref": "#/components/schemas/RegisterDoctor"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterDoctorModel"
+                "$ref": "#/components/schemas/RegisterDoctor"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterDoctorModel"
+                "$ref": "#/components/schemas/RegisterDoctor"
               }
             }
           }
@@ -209,17 +206,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserLoginModel"
+                "$ref": "#/components/schemas/UserLogin"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserLoginModel"
+                "$ref": "#/components/schemas/UserLogin"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UserLoginModel"
+                "$ref": "#/components/schemas/UserLogin"
               }
             }
           }
@@ -244,7 +241,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReadDepartmentModel"
+                    "$ref": "#/components/schemas/ReadDepartment"
                   }
                 }
               },
@@ -252,7 +249,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReadDepartmentModel"
+                    "$ref": "#/components/schemas/ReadDepartment"
                   }
                 }
               },
@@ -260,7 +257,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReadDepartmentModel"
+                    "$ref": "#/components/schemas/ReadDepartment"
                   }
                 }
               }
@@ -276,17 +273,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDepartmentModel"
+                "$ref": "#/components/schemas/AddDepartment"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDepartmentModel"
+                "$ref": "#/components/schemas/AddDepartment"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDepartmentModel"
+                "$ref": "#/components/schemas/AddDepartment"
               }
             }
           }
@@ -320,17 +317,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReadDepartmentModel"
+                  "$ref": "#/components/schemas/ReadDepartment"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReadDepartmentModel"
+                  "$ref": "#/components/schemas/ReadDepartment"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReadDepartmentModel"
+                  "$ref": "#/components/schemas/ReadDepartment"
                 }
               }
             }
@@ -356,17 +353,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDepartmentModel"
+                "$ref": "#/components/schemas/AddDepartment"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDepartmentModel"
+                "$ref": "#/components/schemas/AddDepartment"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDepartmentModel"
+                "$ref": "#/components/schemas/AddDepartment"
               }
             }
           }
@@ -452,17 +449,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDoctorModel"
+                "$ref": "#/components/schemas/UpdateDoctor"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDoctorModel"
+                "$ref": "#/components/schemas/UpdateDoctor"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDoctorModel"
+                "$ref": "#/components/schemas/UpdateDoctor"
               }
             }
           }
@@ -566,17 +563,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDoctorScheduleModel"
+                "$ref": "#/components/schemas/UpdateDoctorSchedule"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDoctorScheduleModel"
+                "$ref": "#/components/schemas/UpdateDoctorSchedule"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDoctorScheduleModel"
+                "$ref": "#/components/schemas/UpdateDoctorSchedule"
               }
             }
           }
@@ -625,21 +622,125 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDoctorScheduleModel"
+                "$ref": "#/components/schemas/AddDoctorSchedule"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDoctorScheduleModel"
+                "$ref": "#/components/schemas/AddDoctorSchedule"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddDoctorScheduleModel"
+                "$ref": "#/components/schemas/AddDoctorSchedule"
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/medical-records": {
+      "post": {
+        "tags": [
+          "MedicalRecord"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMedicalRecord"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMedicalRecord"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMedicalRecord"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MedicalRecord"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/medical-records/{id}": {
+      "put": {
+        "tags": [
+          "MedicalRecord"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalRecord"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalRecord"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMedicalRecord"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MedicalRecord"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -700,17 +801,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdatePatientModel"
+                "$ref": "#/components/schemas/UpdatePatient"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdatePatientModel"
+                "$ref": "#/components/schemas/UpdatePatient"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdatePatientModel"
+                "$ref": "#/components/schemas/UpdatePatient"
               }
             }
           }
@@ -765,11 +866,34 @@
           }
         }
       }
+    },
+    "/api/patients/{patientId}/medical-records": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "AddAppointmentModel": {
+      "AddAppointment": {
         "type": "object",
         "properties": {
           "doctorId": {
@@ -787,7 +911,7 @@
         },
         "additionalProperties": false
       },
-      "AddDepartmentModel": {
+      "AddDepartment": {
         "type": "object",
         "properties": {
           "deptName": {
@@ -801,7 +925,7 @@
         },
         "additionalProperties": false
       },
-      "AddDoctorScheduleModel": {
+      "AddDoctorSchedule": {
         "type": "object",
         "properties": {
           "doctorId": {
@@ -827,7 +951,29 @@
         },
         "additionalProperties": false
       },
-      "ReadDepartmentModel": {
+      "AddMedicalRecord": {
+        "type": "object",
+        "properties": {
+          "appointmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "visitNotes": {
+            "type": "string",
+            "nullable": true
+          },
+          "prescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "followUpInstructions": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReadDepartment": {
         "type": "object",
         "properties": {
           "departmentId": {
@@ -845,14 +991,14 @@
           "doctors": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ReadDoctorModel"
+              "$ref": "#/components/schemas/ReadDoctor"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "ReadDoctorModel": {
+      "ReadDoctor": {
         "type": "object",
         "properties": {
           "doctorId": {
@@ -870,7 +1016,7 @@
         },
         "additionalProperties": false
       },
-      "RegisterDoctorModel": {
+      "RegisterDoctor": {
         "required": [
           "contactNo",
           "departmentId",
@@ -910,7 +1056,7 @@
         },
         "additionalProperties": false
       },
-      "RegisterPatientModel": {
+      "RegisterPatient": {
         "required": [
           "address",
           "bloodGroup",
@@ -960,7 +1106,7 @@
         },
         "additionalProperties": false
       },
-      "RescheduleAppointmentModel": {
+      "RescheduleAppointment": {
         "type": "object",
         "properties": {
           "newTime": {
@@ -970,7 +1116,7 @@
         },
         "additionalProperties": false
       },
-      "UpdateDoctorModel": {
+      "UpdateDoctor": {
         "type": "object",
         "properties": {
           "name": {
@@ -996,7 +1142,7 @@
         },
         "additionalProperties": false
       },
-      "UpdateDoctorScheduleModel": {
+      "UpdateDoctorSchedule": {
         "type": "object",
         "properties": {
           "startTime": {
@@ -1015,7 +1161,25 @@
         },
         "additionalProperties": false
       },
-      "UpdatePatientModel": {
+      "UpdateMedicalRecord": {
+        "type": "object",
+        "properties": {
+          "visitNotes": {
+            "type": "string",
+            "nullable": true
+          },
+          "prescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "followUpInstructions": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdatePatient": {
         "type": "object",
         "properties": {
           "name": {
@@ -1049,7 +1213,7 @@
         },
         "additionalProperties": false
       },
-      "UserLoginModel": {
+      "UserLogin": {
         "required": [
           "email",
           "password"

@@ -15,12 +15,12 @@ namespace HAMS.Services.DoctorScheduleServices
             this.context = context;
         }
 
-        public async Task<IEnumerable<ReadDoctorScheduleModel>> GetSchedulesByDoctorIdAsync(Guid doctorId)
+        public async Task<IEnumerable<ReadDoctorSchedule>> GetSchedulesByDoctorIdAsync(Guid doctorId)
         {
             var data = await context.DoctorSchedules
                                     .Include(d => d.Doctor).ThenInclude(s => s.Department)
                                     .Where(x=>x.DoctorId==doctorId)
-                                    .Select(x => new ReadDoctorScheduleModel()
+                                    .Select(x => new ReadDoctorSchedule()
                                     {
                                         DoctorName = x.Doctor.DoctorName,
                                         DepartmentName = x.Doctor.Department.DeptName,
@@ -33,7 +33,7 @@ namespace HAMS.Services.DoctorScheduleServices
                 
         }
 
-        public async Task<bool> AddScheduleAsync(AddDoctorScheduleModel model)
+        public async Task<bool> AddScheduleAsync(AddDoctorSchedule model)
         {
             var schedule = await context.DoctorSchedules.FirstOrDefaultAsync(s => s.DoctorId == model.DoctorId && s.Day == model.Day);
 
@@ -56,7 +56,7 @@ namespace HAMS.Services.DoctorScheduleServices
             return true;
         }
 
-        public async Task<bool> UpdateScheduleAsync(Guid doctorId, WeekDay day, UpdateDoctorScheduleModel model)
+        public async Task<bool> UpdateScheduleAsync(Guid doctorId, WeekDay day, UpdateDoctorSchedule model)
         {
             var schedule = await context.DoctorSchedules.FirstOrDefaultAsync(s => s.DoctorId == doctorId && s.Day == day);
 

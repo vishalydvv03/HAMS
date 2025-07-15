@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace HAMS.Domain.Models.AppointmentModels
 {
-    public class RescheduleAppointmentModel
+    public class ReadAppointmentByPatient
     {
-        public DateTime NewTime { get; set; }
+        public string DoctorName { get; set; }
+        public DateTime AppointmentDate { get; set; }
     }
 }

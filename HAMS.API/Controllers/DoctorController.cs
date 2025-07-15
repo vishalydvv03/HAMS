@@ -36,7 +36,7 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, UpdateDoctorModel model)
+        public async Task<IActionResult> Update(Guid id, UpdateDoctor model)
         {
             var updated = await service.UpdateAsync(id, model);
             if (!updated)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HAMS.Domain.Models.DoctorScheduleModels
 {
-    public class ReadDoctorScheduleModel
+    public class ReadDoctorSchedule
     {
         public string DoctorName { get; set; }
         public string DepartmentName { get; set; }

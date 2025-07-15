@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HAMS.Domain.Models.AuthenticationModel
 {
-    public class RegisterDoctorModel
+    public class RegisterDoctor
     {
         [Required]
         public string DoctorName { get; set; }
