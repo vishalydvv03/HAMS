@@ -7,7 +7,7 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-	    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	    <GenerateDocumentationFile>false</GenerateDocumentationFile>
 	</PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HAMS.Services\HAMS.Services.csproj" />
+    <ProjectReference Include="..\HAMS.Utility\HAMS.Utility.csproj" />
   </ItemGroup>
 
 </Project>

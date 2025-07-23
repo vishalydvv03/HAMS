@@ -1,5 +1,6 @@
 ﻿using HAMS.Domain.Models.AuthenticationModel;
 using HAMS.Services.AuthenticationServices;
+using HAMS.Utility.UtilityHelpers.JwtToken;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +11,12 @@ namespace HAMS.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService service;
-        public AuthController(IAuthService service)
+        private readonly IJwtTokenService tokenService;
+
+        public AuthController(IAuthService service, IJwtTokenService tokenService)
         {
             this.service = service;
+            this.tokenService = tokenService;
         }
 
         [HttpPost("register/patient")]
@@ -49,7 +53,8 @@ namespace HAMS.API.Controllers
                 return Unauthorized("Email or Password Entered Wrong");
             }
 
-            return Ok($"User Logged In Successfully");
+            var token = tokenService.GenerateToken(user);
+            return Ok($"User Logged In Successfully : {token}");
         }
 
     }
