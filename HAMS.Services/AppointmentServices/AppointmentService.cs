@@ -2,6 +2,7 @@
 using HAMS.Domain.Entities;
 using HAMS.Domain.Enums;
 using HAMS.Domain.Models.AppointmentModels;
+using HAMS.Utility.UtilityHelpers.Email;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -10,16 +11,17 @@ namespace HAMS.Services.AppointmentServices
     public class AppointmentService : IAppointmentService
     {
         private readonly HamsDbContext context;
-        public AppointmentService(HamsDbContext context)
+        private readonly IEmailService emailService;
+        public AppointmentService(HamsDbContext context, IEmailService emailService)
         {
             this.context = context;
+            this.emailService = emailService;
         }
         public async Task<bool> BookAsync(AddAppointment model)
         {
-            var patient = await context.Patients.FindAsync(model.PatientId);
-            var doctor = await context.Doctors.FindAsync(model.DoctorId);
-
-            if (patient == null || doctor == null) 
+            var patient = await context.Patients.Include(x=>x.User).FirstOrDefaultAsync(x=>x.PatientId==model.PatientId);
+            var doctor = await context.Doctors.Include(x => x.User).FirstOrDefaultAsync(x => x.DoctorId == model.DoctorId);
+            if (patient == null || doctor == null)
             {
                 return false;
             }
@@ -57,8 +59,17 @@ namespace HAMS.Services.AppointmentServices
             await context.Appointments.AddAsync(appt);
             await context.SaveChangesAsync();
 
+            var emailBody = $@"
+            <h3>Appointment Confirmed</h3>
+            <p>Dear {patient.PatientName},</p>
+            <p>Your appointment with Dr. {doctor.DoctorName} has been scheduled on <strong>{model.AppointmentTime:dddd, MMMM dd yyyy hh:mm tt}</strong>.</p>
+            <p>Have a nice day !</p>";
+
+            await emailService.SendEmailAsync(patient.User.Email, "Appointment Confirmation", emailBody);
+
             return true;
         }
+
 
         public async Task<bool> CancelAsync(int id)
         {
@@ -74,10 +85,10 @@ namespace HAMS.Services.AppointmentServices
         public async Task<bool> RescheduleAsync(int id, RescheduleAppointment model)
         {
             var current = await context.Appointments.FindAsync(id);
-            if (current == null || current.Status != AppointmentStatus.Scheduled) 
-            { 
+            if (current == null || current.Status != AppointmentStatus.Scheduled)
+            {
                 return false;
-            } 
+            }
             var add = await BookAsync(new AddAppointment
             {
                 DoctorId = current.DoctorId,
@@ -115,7 +126,6 @@ namespace HAMS.Services.AppointmentServices
                             AppointmentDate = x.AppointmentTime
                         }).ToListAsync();
             return data;
-        }   
+        }
     }
 }
-
