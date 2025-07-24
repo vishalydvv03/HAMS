@@ -17,7 +17,7 @@ namespace HAMS.Services.AppointmentServices
             this.context = context;
             this.emailService = emailService;
         }
-        public async Task<bool> BookAsync(AddAppointment model)
+        public async Task<bool> BookAppointmentAsync(AddAppointment model)
         {
             var patient = await context.Patients.Include(x=>x.User).FirstOrDefaultAsync(x=>x.PatientId==model.PatientId);
             var doctor = await context.Doctors.Include(x => x.User).FirstOrDefaultAsync(x => x.DoctorId == model.DoctorId);
@@ -71,7 +71,7 @@ namespace HAMS.Services.AppointmentServices
         }
 
 
-        public async Task<bool> CancelAsync(int id)
+        public async Task<bool> CancelAppointmentAsync(int id)
         {
             var appt = await context.Appointments.FindAsync(id);
             if (appt == null || appt.Status == AppointmentStatus.Cancelled)
@@ -82,14 +82,14 @@ namespace HAMS.Services.AppointmentServices
             await context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> RescheduleAsync(int id, RescheduleAppointment model)
+        public async Task<bool> RescheduleAppointmentAsync(int id, RescheduleAppointment model)
         {
             var current = await context.Appointments.FindAsync(id);
             if (current == null || current.Status != AppointmentStatus.Scheduled)
             {
                 return false;
             }
-            var add = await BookAsync(new AddAppointment
+            var add = await BookAppointmentAsync(new AddAppointment
             {
                 DoctorId = current.DoctorId,
                 PatientId = current.PatientId,
@@ -105,7 +105,7 @@ namespace HAMS.Services.AppointmentServices
             await context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> CompleteAsync(int id)
+        public async Task<bool> CompleteAppointmentAsync(int id)
         {
             var appt = await context.Appointments.FindAsync(id);
             if (appt == null || appt.Status != AppointmentStatus.Scheduled)
@@ -127,5 +127,18 @@ namespace HAMS.Services.AppointmentServices
                         }).ToListAsync();
             return data;
         }
+        public async Task<IEnumerable<ReadAppointmentByPatient>> GetAppointmentByPatientAsync(Guid patientId)
+        {
+            var data = await context.Appointments
+                        .Where(a => a.PatientId == patientId && a.Patient.User.IsActive)
+                        .Select(x => new ReadAppointmentByPatient()
+                        {
+                            DoctorName = x.Doctor.DoctorName,
+                            AppointmentDate = x.AppointmentTime,
+                            Status = x.Status,
+                        }).ToListAsync();
+            return data;
+        }
+
     }
 }

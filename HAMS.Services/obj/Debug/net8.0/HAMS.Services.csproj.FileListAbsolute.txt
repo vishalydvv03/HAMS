@@ -16,3 +16,5 @@ C:\Users\visha\source\repos\HAMS\HAMS.Services\obj\Debug\net8.0\refint\HAMS.Serv
 C:\Users\visha\source\repos\HAMS\HAMS.Services\obj\Debug\net8.0\HAMS.Services.pdb
 C:\Users\visha\source\repos\HAMS\HAMS.Services\obj\Debug\net8.0\ref\HAMS.Services.dll
 C:\Users\visha\source\repos\HAMS\HAMS.Services\obj\Debug\net8.0\HAMS.Services.sourcelink.json
+C:\Users\visha\source\repos\HAMS\HAMS.Services\bin\Debug\net8.0\HAMS.Utility.dll
+C:\Users\visha\source\repos\HAMS\HAMS.Services\bin\Debug\net8.0\HAMS.Utility.pdb

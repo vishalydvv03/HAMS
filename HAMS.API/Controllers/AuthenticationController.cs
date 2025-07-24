@@ -8,12 +8,12 @@ namespace HAMS.API.Controllers
 {
     [Route("api/auth")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthenticationController : ControllerBase
     {
         private readonly IAuthService service;
         private readonly IJwtTokenService tokenService;
 
-        public AuthController(IAuthService service, IJwtTokenService tokenService)
+        public AuthenticationController(IAuthService service, IJwtTokenService tokenService)
         {
             this.service = service;
             this.tokenService = tokenService;

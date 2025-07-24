@@ -8,18 +8,18 @@ namespace HAMS.API.Controllers
 {
     [Route("api/appointments")]
     [ApiController]
-    public class AppointmentController : ControllerBase
+    public class AppointmentsController : ControllerBase
     {
         private readonly IAppointmentService service;
-        public AppointmentController(IAppointmentService service)
+        public AppointmentsController(IAppointmentService service)
         {
             this.service = service;
         }
 
         [HttpPost]
-        public async Task<IActionResult> BookAppointment(AddAppointment model)
+        public async Task<IActionResult> BookAppointmentForPatient(AddAppointment model)
         {
-            var result = await service.BookAsync(model);
+            var result = await service.BookAppointmentAsync(model);
 
             if (result == false)
             {
@@ -32,7 +32,7 @@ namespace HAMS.API.Controllers
         [HttpPut("{id:int}/cancel")]
         public async Task<IActionResult> Cancel(int id)
         {
-            var result = await service.CancelAsync(id);
+            var result = await service.CancelAppointmentAsync(id);
             if (!result)
             {
                 return NotFound("No Such Appointment");
@@ -44,7 +44,7 @@ namespace HAMS.API.Controllers
         [HttpPut("{id:int}/reschedule")]
         public async Task<IActionResult> Reschedule(int id, RescheduleAppointment model)
         {
-            var result = await service.RescheduleAsync(id, model);
+            var result = await service.RescheduleAppointmentAsync(id, model);
             if (!result)
             {
                 return BadRequest("New Slot Unavailable");
@@ -56,7 +56,7 @@ namespace HAMS.API.Controllers
         [HttpPut("{id:int}/complete")]
         public async Task<IActionResult> Complete(int id)
         {
-            var result = await service.CompleteAsync(id);
+            var result = await service.CompleteAppointmentAsync(id);
             if (!result)
             {
                 return NotFound("No Such Appointment");

@@ -8,7 +8,7 @@
     "/api/appointments": {
       "post": {
         "tags": [
-          "Appointment"
+          "Appointments"
         ],
         "requestBody": {
           "content": {
@@ -37,7 +37,7 @@
       },
       "get": {
         "tags": [
-          "Appointment"
+          "Appointments"
         ],
         "responses": {
           "200": {
@@ -49,7 +49,7 @@
     "/api/appointments/{id}/cancel": {
       "put": {
         "tags": [
-          "Appointment"
+          "Appointments"
         ],
         "parameters": [
           {
@@ -72,7 +72,7 @@
     "/api/appointments/{id}/reschedule": {
       "put": {
         "tags": [
-          "Appointment"
+          "Appointments"
         ],
         "parameters": [
           {
@@ -114,7 +114,7 @@
     "/api/appointments/{id}/complete": {
       "put": {
         "tags": [
-          "Appointment"
+          "Appointments"
         ],
         "parameters": [
           {
@@ -137,7 +137,7 @@
     "/api/auth/register/patient": {
       "post": {
         "tags": [
-          "Auth"
+          "Authentication"
         ],
         "requestBody": {
           "content": {
@@ -168,7 +168,7 @@
     "/api/auth/register/doctor": {
       "post": {
         "tags": [
-          "Auth"
+          "Authentication"
         ],
         "requestBody": {
           "content": {
@@ -199,7 +199,7 @@
     "/api/auth/login": {
       "post": {
         "tags": [
-          "Auth"
+          "Authentication"
         ],
         "requestBody": {
           "content": {
@@ -230,7 +230,7 @@
     "/api/departments": {
       "get": {
         "tags": [
-          "Department"
+          "Departments"
         ],
         "responses": {
           "200": {
@@ -266,7 +266,7 @@
       },
       "post": {
         "tags": [
-          "Department"
+          "Departments"
         ],
         "requestBody": {
           "content": {
@@ -297,7 +297,7 @@
     "/api/departments/{id}": {
       "get": {
         "tags": [
-          "Department"
+          "Departments"
         ],
         "parameters": [
           {
@@ -335,7 +335,7 @@
       },
       "put": {
         "tags": [
-          "Department"
+          "Departments"
         ],
         "parameters": [
           {
@@ -375,7 +375,7 @@
       },
       "delete": {
         "tags": [
-          "Department"
+          "Departments"
         ],
         "parameters": [
           {
@@ -398,7 +398,7 @@
     "/api/doctors": {
       "get": {
         "tags": [
-          "Doctor"
+          "Doctors"
         ],
         "responses": {
           "200": {
@@ -410,7 +410,7 @@
     "/api/doctors/{id}": {
       "get": {
         "tags": [
-          "Doctor"
+          "Doctors"
         ],
         "parameters": [
           {
@@ -431,7 +431,7 @@
       },
       "put": {
         "tags": [
-          "Doctor"
+          "Doctors"
         ],
         "parameters": [
           {
@@ -471,7 +471,7 @@
       },
       "delete": {
         "tags": [
-          "Doctor"
+          "Doctors"
         ],
         "parameters": [
           {
@@ -481,6 +481,104 @@
             "schema": {
               "type": "string",
               "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/doctors/{id}/schedules": {
+      "get": {
+        "tags": [
+          "Doctors"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Doctors"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "day",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/WeekDay"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDoctorSchedule"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDoctorSchedule"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDoctorSchedule"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Doctors"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "day",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/WeekDay"
             }
           }
         ],
@@ -494,7 +592,7 @@
     "/api/doctors/{doctorId}/appointments": {
       "get": {
         "tags": [
-          "Doctor"
+          "Doctors"
         ],
         "parameters": [
           {
@@ -514,19 +612,60 @@
         }
       }
     },
-    "/api/doctor/schedule/{doctorId}": {
+    "/api/doctor-schedules": {
+      "post": {
+        "tags": [
+          "DoctorSchedules"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDoctorSchedule"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDoctorSchedule"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDoctorSchedule"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "get": {
         "tags": [
-          "DoctorSchedule"
+          "DoctorSchedules"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/doctor-schedules/{id}": {
+      "get": {
+        "tags": [
+          "DoctorSchedules"
         ],
         "parameters": [
           {
-            "name": "doctorId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -538,23 +677,16 @@
       },
       "put": {
         "tags": [
-          "DoctorSchedule"
+          "DoctorSchedules"
         ],
         "parameters": [
           {
-            "name": "doctorId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "day",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/WeekDay"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -562,17 +694,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDoctorSchedule"
+                "$ref": "#/components/schemas/AddDoctorSchedule"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDoctorSchedule"
+                "$ref": "#/components/schemas/AddDoctorSchedule"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDoctorSchedule"
+                "$ref": "#/components/schemas/AddDoctorSchedule"
               }
             }
           }
@@ -585,57 +717,19 @@
       },
       "delete": {
         "tags": [
-          "DoctorSchedule"
+          "DoctorSchedules"
         ],
         "parameters": [
           {
-            "name": "doctorId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "day",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/WeekDay"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/doctor/schedule": {
-      "post": {
-        "tags": [
-          "DoctorSchedule"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddDoctorSchedule"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddDoctorSchedule"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddDoctorSchedule"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -646,7 +740,7 @@
     "/api/medical-records": {
       "post": {
         "tags": [
-          "MedicalRecord"
+          "MedicalRecords"
         ],
         "requestBody": {
           "content": {
@@ -675,7 +769,7 @@
       },
       "get": {
         "tags": [
-          "MedicalRecord"
+          "MedicalRecords"
         ],
         "responses": {
           "200": {
@@ -687,7 +781,7 @@
     "/api/medical-records/{id}": {
       "put": {
         "tags": [
-          "MedicalRecord"
+          "MedicalRecords"
         ],
         "parameters": [
           {
@@ -727,7 +821,7 @@
       },
       "delete": {
         "tags": [
-          "MedicalRecord"
+          "MedicalRecords"
         ],
         "parameters": [
           {
@@ -750,7 +844,7 @@
     "/api/patients": {
       "get": {
         "tags": [
-          "Patient"
+          "Patients"
         ],
         "responses": {
           "200": {
@@ -762,7 +856,7 @@
     "/api/patients/{id}": {
       "get": {
         "tags": [
-          "Patient"
+          "Patients"
         ],
         "parameters": [
           {
@@ -783,7 +877,7 @@
       },
       "put": {
         "tags": [
-          "Patient"
+          "Patients"
         ],
         "parameters": [
           {
@@ -823,7 +917,7 @@
       },
       "delete": {
         "tags": [
-          "Patient"
+          "Patients"
         ],
         "parameters": [
           {
@@ -846,7 +940,7 @@
     "/api/patients/{patientId}/appointments": {
       "get": {
         "tags": [
-          "Patient"
+          "Patients"
         ],
         "parameters": [
           {
@@ -869,7 +963,7 @@
     "/api/patients/{patientId}/medical-records": {
       "get": {
         "tags": [
-          "Patient"
+          "Patients"
         ],
         "parameters": [
           {
@@ -892,7 +986,7 @@
     "/api/patients/search": {
       "get": {
         "tags": [
-          "Patient"
+          "Patients"
         ],
         "parameters": [
           {

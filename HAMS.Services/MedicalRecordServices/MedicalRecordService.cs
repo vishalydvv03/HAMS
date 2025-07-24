@@ -94,5 +94,25 @@ namespace HAMS.Services.MedicalRecordServices
                 }).ToListAsync();
             return data;
         }
+        public async Task<IEnumerable<ReadMedicalRecordByPatient>> GetRecordsForPatientAsync(Guid patId)
+        {
+            var data = await context.MedicalRecords
+                .Include(r => r.Appointment).ThenInclude(a => a.Patient)
+                .Include(r => r.Appointment).ThenInclude(a => a.Doctor)
+                .Where(r => r.Appointment.PatientId == patId)
+                .Select(r => new ReadMedicalRecordByPatient()
+                {
+                    RecordId = r.RecordId,
+                    AppointmentId = r.AppointmentId,
+                    DoctorId = r.Appointment.DoctorId,
+                    DoctorName = r.Appointment.Doctor.DoctorName,
+                    AppointmentTime = r.Appointment.AppointmentTime,
+                    VisitNotes = r.VisitNotes,
+                    Prescription = r.Prescription,
+                    FollowUpInstructions = r.FollowUpInstructions,
+                    CreatedAt = r.CreatedAt
+                }).ToListAsync();
+            return data;
+        }
     }
 }

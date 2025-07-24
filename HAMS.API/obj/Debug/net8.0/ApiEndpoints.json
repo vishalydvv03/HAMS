@@ -1,7 +1,7 @@
 [
   {
-    "ContainingType": "HAMS.API.Controllers.AppointmentController",
-    "Method": "BookAppointment",
+    "ContainingType": "HAMS.API.Controllers.AppointmentsController",
+    "Method": "BookAppointmentForPatient",
     "RelativePath": "api/appointments",
     "HttpMethod": "POST",
     "IsController": true,
@@ -16,7 +16,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.AppointmentController",
+    "ContainingType": "HAMS.API.Controllers.AppointmentsController",
     "Method": "GetAllAppointments",
     "RelativePath": "api/appointments",
     "HttpMethod": "GET",
@@ -26,7 +26,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.AppointmentController",
+    "ContainingType": "HAMS.API.Controllers.AppointmentsController",
     "Method": "Cancel",
     "RelativePath": "api/appointments/{id}/cancel",
     "HttpMethod": "PUT",
@@ -42,7 +42,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.AppointmentController",
+    "ContainingType": "HAMS.API.Controllers.AppointmentsController",
     "Method": "Complete",
     "RelativePath": "api/appointments/{id}/complete",
     "HttpMethod": "PUT",
@@ -58,7 +58,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.AppointmentController",
+    "ContainingType": "HAMS.API.Controllers.AppointmentsController",
     "Method": "Reschedule",
     "RelativePath": "api/appointments/{id}/reschedule",
     "HttpMethod": "PUT",
@@ -79,7 +79,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.AuthController",
+    "ContainingType": "HAMS.API.Controllers.AuthenticationController",
     "Method": "Login",
     "RelativePath": "api/auth/login",
     "HttpMethod": "POST",
@@ -95,7 +95,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.AuthController",
+    "ContainingType": "HAMS.API.Controllers.AuthenticationController",
     "Method": "RegisterDoctor",
     "RelativePath": "api/auth/register/doctor",
     "HttpMethod": "POST",
@@ -111,7 +111,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.AuthController",
+    "ContainingType": "HAMS.API.Controllers.AuthenticationController",
     "Method": "RegisterPatient",
     "RelativePath": "api/auth/register/patient",
     "HttpMethod": "POST",
@@ -127,7 +127,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DepartmentController",
+    "ContainingType": "HAMS.API.Controllers.DepartmentsController",
     "Method": "GetAllDepartments",
     "RelativePath": "api/departments",
     "HttpMethod": "GET",
@@ -147,7 +147,7 @@
     ]
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DepartmentController",
+    "ContainingType": "HAMS.API.Controllers.DepartmentsController",
     "Method": "CreateDepartment",
     "RelativePath": "api/departments",
     "HttpMethod": "POST",
@@ -163,7 +163,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DepartmentController",
+    "ContainingType": "HAMS.API.Controllers.DepartmentsController",
     "Method": "GetDepartmentById",
     "RelativePath": "api/departments/{id}",
     "HttpMethod": "GET",
@@ -189,7 +189,7 @@
     ]
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DepartmentController",
+    "ContainingType": "HAMS.API.Controllers.DepartmentsController",
     "Method": "UpdateDepartment",
     "RelativePath": "api/departments/{id}",
     "HttpMethod": "PUT",
@@ -210,7 +210,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DepartmentController",
+    "ContainingType": "HAMS.API.Controllers.DepartmentsController",
     "Method": "DeleteDepartment",
     "RelativePath": "api/departments/{id}",
     "HttpMethod": "DELETE",
@@ -226,9 +226,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DoctorScheduleController",
+    "ContainingType": "HAMS.API.Controllers.DoctorSchedulesController",
     "Method": "AddDoctorSchedule",
-    "RelativePath": "api/doctor/schedule",
+    "RelativePath": "api/doctor-schedules",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -242,70 +242,70 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DoctorScheduleController",
-    "Method": "GetDoctorSchedule",
-    "RelativePath": "api/doctor/schedule/{doctorId}",
+    "ContainingType": "HAMS.API.Controllers.DoctorSchedulesController",
+    "Method": "GetAllDoctorSchedules",
+    "RelativePath": "api/doctor-schedules",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.DoctorSchedulesController",
+    "Method": "GetScheduleById",
+    "RelativePath": "api/doctor-schedules/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "doctorId",
-        "Type": "System.Guid",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DoctorScheduleController",
-    "Method": "UpdateDoctorSchedule",
-    "RelativePath": "api/doctor/schedule/{doctorId}",
+    "ContainingType": "HAMS.API.Controllers.DoctorSchedulesController",
+    "Method": "UpdateScheduleById",
+    "RelativePath": "api/doctor-schedules/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "doctorId",
-        "Type": "System.Guid",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       },
       {
-        "Name": "day",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "model",
-        "Type": "HAMS.Domain.Models.DoctorScheduleModels.UpdateDoctorSchedule",
+        "Type": "HAMS.Domain.Models.DoctorScheduleModels.AddDoctorSchedule",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DoctorScheduleController",
-    "Method": "DeleteDoctorSchedule",
-    "RelativePath": "api/doctor/schedule/{doctorId}",
+    "ContainingType": "HAMS.API.Controllers.DoctorSchedulesController",
+    "Method": "DeleteScheduleById",
+    "RelativePath": "api/doctor-schedules/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "doctorId",
-        "Type": "System.Guid",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
-      },
-      {
-        "Name": "day",
-        "Type": "System.String",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DoctorController",
+    "ContainingType": "HAMS.API.Controllers.DoctorsController",
     "Method": "GetAll",
     "RelativePath": "api/doctors",
     "HttpMethod": "GET",
@@ -315,7 +315,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DoctorController",
+    "ContainingType": "HAMS.API.Controllers.DoctorsController",
     "Method": "GetAppointments",
     "RelativePath": "api/doctors/{doctorId}/appointments",
     "HttpMethod": "GET",
@@ -331,7 +331,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DoctorController",
+    "ContainingType": "HAMS.API.Controllers.DoctorsController",
     "Method": "GetById",
     "RelativePath": "api/doctors/{id}",
     "HttpMethod": "GET",
@@ -347,7 +347,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DoctorController",
+    "ContainingType": "HAMS.API.Controllers.DoctorsController",
     "Method": "Update",
     "RelativePath": "api/doctors/{id}",
     "HttpMethod": "PUT",
@@ -368,7 +368,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.DoctorController",
+    "ContainingType": "HAMS.API.Controllers.DoctorsController",
     "Method": "Delete",
     "RelativePath": "api/doctors/{id}",
     "HttpMethod": "DELETE",
@@ -384,7 +384,70 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.MedicalRecordController",
+    "ContainingType": "HAMS.API.Controllers.DoctorsController",
+    "Method": "GetDoctorSchedule",
+    "RelativePath": "api/doctors/{id}/schedules",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.DoctorsController",
+    "Method": "UpdateDoctorSchedule",
+    "RelativePath": "api/doctors/{id}/schedules",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "day",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "model",
+        "Type": "HAMS.Domain.Models.DoctorScheduleModels.UpdateDoctorSchedule",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.DoctorsController",
+    "Method": "DeleteDoctorSchedule",
+    "RelativePath": "api/doctors/{id}/schedules",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "day",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.MedicalRecordsController",
     "Method": "AddRecord",
     "RelativePath": "api/medical-records",
     "HttpMethod": "POST",
@@ -400,8 +463,8 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.MedicalRecordController",
-    "Method": "GetAll",
+    "ContainingType": "HAMS.API.Controllers.MedicalRecordsController",
+    "Method": "GetAllRecords",
     "RelativePath": "api/medical-records",
     "HttpMethod": "GET",
     "IsController": true,
@@ -410,8 +473,8 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.MedicalRecordController",
-    "Method": "Update",
+    "ContainingType": "HAMS.API.Controllers.MedicalRecordsController",
+    "Method": "UpdateRecord",
     "RelativePath": "api/medical-records/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -431,8 +494,8 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.MedicalRecordController",
-    "Method": "Delete",
+    "ContainingType": "HAMS.API.Controllers.MedicalRecordsController",
+    "Method": "DeleteRecord",
     "RelativePath": "api/medical-records/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -447,7 +510,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.PatientController",
+    "ContainingType": "HAMS.API.Controllers.PatientsController",
     "Method": "GetAll",
     "RelativePath": "api/patients",
     "HttpMethod": "GET",
@@ -457,7 +520,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.PatientController",
+    "ContainingType": "HAMS.API.Controllers.PatientsController",
     "Method": "GetById",
     "RelativePath": "api/patients/{id}",
     "HttpMethod": "GET",
@@ -473,7 +536,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.PatientController",
+    "ContainingType": "HAMS.API.Controllers.PatientsController",
     "Method": "Update",
     "RelativePath": "api/patients/{id}",
     "HttpMethod": "PUT",
@@ -494,7 +557,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.PatientController",
+    "ContainingType": "HAMS.API.Controllers.PatientsController",
     "Method": "Delete",
     "RelativePath": "api/patients/{id}",
     "HttpMethod": "DELETE",
@@ -510,8 +573,8 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.PatientController",
-    "Method": "GetAppointments",
+    "ContainingType": "HAMS.API.Controllers.PatientsController",
+    "Method": "GetAllAppointmentsByPatient",
     "RelativePath": "api/patients/{patientId}/appointments",
     "HttpMethod": "GET",
     "IsController": true,
@@ -526,7 +589,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.PatientController",
+    "ContainingType": "HAMS.API.Controllers.PatientsController",
     "Method": "GetMedicalRecords",
     "RelativePath": "api/patients/{patientId}/medical-records",
     "HttpMethod": "GET",
@@ -542,7 +605,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HAMS.API.Controllers.PatientController",
+    "ContainingType": "HAMS.API.Controllers.PatientsController",
     "Method": "SearchPatients",
     "RelativePath": "api/patients/search",
     "HttpMethod": "GET",

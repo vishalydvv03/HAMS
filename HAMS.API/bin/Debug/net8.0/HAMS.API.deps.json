@@ -1037,7 +1037,8 @@
       "HAMS.Services/1.0.0": {
         "dependencies": {
           "HAMS.Data": "1.0.0",
-          "HAMS.Domain": "1.0.0"
+          "HAMS.Domain": "1.0.0",
+          "HAMS.Utility": "1.0.0"
         },
         "runtime": {
           "HAMS.Services.dll": {

@@ -10,9 +10,13 @@ namespace HAMS.Services.DoctorScheduleServices
 {
     public interface IDoctorScheduleService
     {
-        Task<IEnumerable<ReadDoctorSchedule>> GetSchedulesByDoctorIdAsync(Guid doctorId);
+        Task<IEnumerable<ReadDoctorSchedule>> GetSchedulesByDoctorAsync(Guid doctorId);
         Task<bool> AddScheduleAsync(AddDoctorSchedule model);
         Task<bool> UpdateScheduleAsync(Guid doctorId, WeekDay day, UpdateDoctorSchedule model);
         Task<bool> DeleteScheduleAsync(Guid doctorId, WeekDay day);
+        Task<ReadDoctorSchedule?> GetScheduleByIdAsync(int scheduleId);
+        Task<List<ReadDoctorSchedule>> GetAllDoctorsScheduleAsync();
+        Task<bool> UpdateScheduleByIdAsync(int scheduleId, AddDoctorSchedule model);
+        Task<bool> DeleteScheduleByIdAsync(int scheduleId);
     }
 }

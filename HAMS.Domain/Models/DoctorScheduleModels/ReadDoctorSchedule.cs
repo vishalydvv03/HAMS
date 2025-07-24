@@ -9,6 +9,7 @@ namespace HAMS.Domain.Models.DoctorScheduleModels
 {
     public class ReadDoctorSchedule
     {
+        public int ScheduleId { get; set; }
         public string DoctorName { get; set; }
         public string DepartmentName { get; set; }
         public WeekDay Day { get; set; }

@@ -10,11 +10,11 @@ namespace HAMS.API.Controllers
 {
     [Route("api/departments")]
     [ApiController]
-    public class DepartmentController : ControllerBase
+    public class DepartmentsController : ControllerBase
     {
         private readonly IDepartmentService service;
 
-        public DepartmentController(IDepartmentService service)
+        public DepartmentsController(IDepartmentService service)
         {
             this.service = service;
         }

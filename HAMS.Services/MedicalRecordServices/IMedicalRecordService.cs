@@ -13,6 +13,7 @@ namespace HAMS.Services.MedicalRecordServices
         Task<bool> UpdateAsync(int id, UpdateMedicalRecord model);
         Task<bool> DeleteAsync(int id);
         Task<IEnumerable<ReadMedicalRecord>> GetAllAsync();
+        Task<IEnumerable<ReadMedicalRecordByPatient>> GetRecordsForPatientAsync(Guid patId);
 
     }
 }

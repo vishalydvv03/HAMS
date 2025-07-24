@@ -89,38 +89,6 @@ namespace HAMS.Services.PatientServices
             await context.SaveChangesAsync();
             return true;
         }
-        public async Task<IEnumerable<ReadAppointmentByPatient>> GetAppointmentByPatientAsync(Guid patId)
-        {
-            var data = await context.Appointments
-                        .Where(a => a.PatientId == patId && a.Patient.User.IsActive)
-                        .Select(x => new ReadAppointmentByPatient()
-                        {
-                            DoctorName = x.Doctor.DoctorName,
-                            AppointmentDate = x.AppointmentTime,
-                            Status = x.Status,
-                        }).ToListAsync();
-            return data;
-        }
-        public async Task<IEnumerable<ReadMedicalRecordByPatient>> GetRecordsForPatientAsync(Guid patId)
-        {
-            var data = await context.MedicalRecords
-                .Include(r => r.Appointment).ThenInclude(a => a.Patient)
-                .Include(r => r.Appointment).ThenInclude(a => a.Doctor)
-                .Where(r => r.Appointment.PatientId == patId)
-                .Select(r => new ReadMedicalRecordByPatient()
-                {
-                    RecordId = r.RecordId,
-                    AppointmentId = r.AppointmentId,
-                    DoctorId = r.Appointment.DoctorId,
-                    DoctorName = r.Appointment.Doctor.DoctorName,
-                    AppointmentTime = r.Appointment.AppointmentTime,
-                    VisitNotes = r.VisitNotes,
-                    Prescription = r.Prescription,
-                    FollowUpInstructions = r.FollowUpInstructions,
-                    CreatedAt = r.CreatedAt
-                }).ToListAsync();
-            return data;
-        }
         public async Task<IEnumerable<ReadPatient>> SearchPatientsAsync(string? name, string? email, string? mobile)
         {
             var query = context.Users.Include(x=>x.Patient).AsNoTracking().AsQueryable();

@@ -15,8 +15,6 @@ namespace HAMS.Services.PatientServices
         Task<ReadPatient> GetByIdAsync(Guid id);
         Task<bool> UpdateAsync(Guid id, UpdatePatient model);
         Task<bool> DeleteAsync(Guid id);
-        Task<IEnumerable<ReadAppointmentByPatient>> GetAppointmentByPatientAsync(Guid patId);
-        Task<IEnumerable<ReadMedicalRecordByPatient>> GetRecordsForPatientAsync(Guid patId);
         Task<IEnumerable<ReadPatient>> SearchPatientsAsync(string? name, string? email, string? mobile);
 
     }

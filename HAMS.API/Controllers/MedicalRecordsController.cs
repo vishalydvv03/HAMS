@@ -8,10 +8,10 @@ namespace HAMS.API.Controllers
 {
     [Route("api/medical-records")]
     [ApiController]
-    public class MedicalRecordController : ControllerBase
+    public class MedicalRecordsController : ControllerBase
     {
         private readonly IMedicalRecordService service;
-        public MedicalRecordController(IMedicalRecordService service)
+        public MedicalRecordsController(IMedicalRecordService service)
         {
             this.service = service;
         }
@@ -28,7 +28,7 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(int id, UpdateMedicalRecord model) 
+        public async Task<IActionResult> UpdateRecord(int id, UpdateMedicalRecord model) 
         {
             var result = await service.UpdateAsync(id, model);
             if (!result)
@@ -39,7 +39,7 @@ namespace HAMS.API.Controllers
         }
             
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteRecord(int id)
         {
             var result = await service.DeleteAsync(id);
             if (!result)
@@ -50,7 +50,7 @@ namespace HAMS.API.Controllers
         }
             
         [HttpGet]
-        public async Task<IActionResult> GetAll() 
+        public async Task<IActionResult> GetAllRecords() 
         {
             var data = await service.GetAllAsync();
             return Ok(data);
