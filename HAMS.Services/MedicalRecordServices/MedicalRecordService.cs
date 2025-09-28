@@ -2,6 +2,7 @@
 using HAMS.Domain.Entities;
 using HAMS.Domain.Enums;
 using HAMS.Domain.Models.MedicalRecordModels;
+using HAMS.Utility;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,21 +20,23 @@ namespace HAMS.Services.MedicalRecordServices
             this.context = context;
         }
 
-        public async Task<bool> AddAsync(AddMedicalRecord model)
+        public async Task<ServiceResult> AddAsync(AddMedicalRecord model)
         {
+            var result = new ServiceResult();
             var appt = await context.Appointments.Include(a => a.Patient)
                                                  .Include(a => a.Doctor)
                                                  .FirstOrDefaultAsync(a => a.AppointmentId == model.AppointmentId);
 
             if (appt == null || appt.Status != AppointmentStatus.Completed) 
             {
-                return false;
+                result.SetBadRequest("Appointment Dosesn't Exist or not completed");
+                return result;
             }
 
-            bool exists = await context.MedicalRecords.AnyAsync(r => r.AppointmentId == model.AppointmentId);
-            if (exists)
+            bool recordExists = await context.MedicalRecords.AnyAsync(r => r.AppointmentId == model.AppointmentId);
+            if (recordExists)
             {
-                return false;
+                result.SetConflict();
             }
 
             var record = new MedicalRecord()
@@ -45,37 +48,42 @@ namespace HAMS.Services.MedicalRecordServices
                         };
             await context.MedicalRecords.AddAsync(record);
             await context.SaveChangesAsync();
-            return true;
+            result.SetSuccess();
+            return result;
         }
 
-        public async Task<bool> UpdateAsync(int id, UpdateMedicalRecord model)
+        public async Task<ServiceResult> UpdateAsync(int id, UpdateMedicalRecord model)
         {
+            var result = new ServiceResult();
             var record = await context.MedicalRecords.FindAsync(id);
-            if (record == null)
+            if (record != null)
             {
-                return false;
-            }
-            record.VisitNotes = model.VisitNotes;
-            record.Prescription = model.Prescription;
-            record.FollowUpInstructions = model.FollowUpInstructions;
+                record.VisitNotes = model.VisitNotes;
+                record.Prescription = model.Prescription;
+                record.FollowUpInstructions = model.FollowUpInstructions;
 
-            await context.SaveChangesAsync();
-            return true;
+                await context.SaveChangesAsync();
+                result.SetSuccess();
+            }
+            return result;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<ServiceResult> DeleteAsync(int id)
         {
+            var result = new ServiceResult();
             var rec = await context.MedicalRecords.FindAsync(id);
-            if (rec == null)
+            if (rec != null)
             {
-                return false;
+                context.MedicalRecords.Remove(rec);
+                await context.SaveChangesAsync();
+                result.SetSuccess();
+                
             }
-            context.MedicalRecords.Remove(rec);
-            await context.SaveChangesAsync();
-            return true;
+            return result;
         }
-        public async Task<IEnumerable<ReadMedicalRecord>> GetAllAsync()
+        public async Task<ServiceResult<List<ReadMedicalRecord>>> GetAllAsync()
         {
+            var result = new ServiceResult<List<ReadMedicalRecord>>();
             var data = await context.MedicalRecords
                 .Include(r => r.Appointment).ThenInclude(a => a.Patient)
                 .Include(r => r.Appointment).ThenInclude(a => a.Doctor)
@@ -92,10 +100,13 @@ namespace HAMS.Services.MedicalRecordServices
                     FollowUpInstructions = r.FollowUpInstructions,
                     CreatedAt = r.CreatedAt
                 }).ToListAsync();
-            return data;
+
+            result.SetSuccess(data);
+            return result;
         }
-        public async Task<IEnumerable<ReadMedicalRecordByPatient>> GetRecordsForPatientAsync(Guid patId)
+        public async Task<ServiceResult<List<ReadMedicalRecordByPatient>>> GetRecordsForPatientAsync(Guid patId)
         {
+            var result = new ServiceResult<List<ReadMedicalRecordByPatient>>();
             var data = await context.MedicalRecords
                 .Include(r => r.Appointment).ThenInclude(a => a.Patient)
                 .Include(r => r.Appointment).ThenInclude(a => a.Doctor)
@@ -112,7 +123,9 @@ namespace HAMS.Services.MedicalRecordServices
                     FollowUpInstructions = r.FollowUpInstructions,
                     CreatedAt = r.CreatedAt
                 }).ToListAsync();
-            return data;
+
+            result.SetSuccess(data);
+            return result;
         }
     }
 }

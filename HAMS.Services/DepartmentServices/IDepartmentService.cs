@@ -1,6 +1,7 @@
 ﻿using HAMS.Domain.Entities;
 using HAMS.Domain.Models.Department;
 using HAMS.Domain.Models.DepartmentModels;
+using HAMS.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,11 @@ namespace HAMS.Services.DepartmentServices
 {
     public interface IDepartmentService
     {
-        Task<IEnumerable<ReadDepartment>> GetAllDepartmentAsync();
-        Task<ReadDepartment> GetDepartmentByIdAsync(int id);
-        Task<bool> AddDepartmentAsync(AddDepartment dept);
-        Task<bool> UpdateDepartmentAsync(int id, AddDepartment dept);
-        Task<bool> DeleteDepartmentAsync(int id);
+        Task<ServiceResult<List<ReadDepartment>>> GetAllDepartmentAsync();
+        Task<ServiceResult<ReadDepartment>> GetDepartmentByIdAsync(int id);
+        Task<ServiceResult> AddDepartmentAsync(AddDepartment dept);
+        Task<ServiceResult> UpdateDepartmentAsync(int id, AddDepartment dept);
+        Task<ServiceResult> DeleteDepartmentAsync(int id);
 
     }
 }

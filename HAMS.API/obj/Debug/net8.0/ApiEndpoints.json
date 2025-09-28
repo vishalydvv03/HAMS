@@ -1,5 +1,63 @@
 [
   {
+    "ContainingType": "HAMS.API.Controllers.AccountsController",
+    "Method": "Login",
+    "RelativePath": "api/accounts/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HAMS.Domain.Models.AuthenticationModel.UserLogin",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.AccountsController",
+    "Method": "RegisterDoctor",
+    "RelativePath": "api/accounts/register/doctor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HAMS.Domain.Models.AuthenticationModel.RegisterDoctor",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HAMS.API.Controllers.AccountsController",
+    "Method": "RegisterPatient",
+    "RelativePath": "api/accounts/register/patient",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HAMS.Domain.Models.AuthenticationModel.RegisterPatient",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HAMS.Utility.ServiceResult",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "HAMS.API.Controllers.AppointmentsController",
     "Method": "BookAppointmentForPatient",
     "RelativePath": "api/appointments",
@@ -73,54 +131,6 @@
       {
         "Name": "model",
         "Type": "HAMS.Domain.Models.AppointmentModels.RescheduleAppointment",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HAMS.API.Controllers.AuthenticationController",
-    "Method": "Login",
-    "RelativePath": "api/auth/login",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "HAMS.Domain.Models.AuthenticationModel.UserLogin",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HAMS.API.Controllers.AuthenticationController",
-    "Method": "RegisterDoctor",
-    "RelativePath": "api/auth/register/doctor",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "HAMS.Domain.Models.AuthenticationModel.RegisterDoctor",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HAMS.API.Controllers.AuthenticationController",
-    "Method": "RegisterPatient",
-    "RelativePath": "api/auth/register/patient",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "HAMS.Domain.Models.AuthenticationModel.RegisterPatient",
         "IsRequired": true
       }
     ],

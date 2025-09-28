@@ -1,6 +1,7 @@
 ﻿using HAMS.Domain.Enums;
 using HAMS.Domain.Models.DoctorScheduleModels;
 using HAMS.Services.DoctorScheduleServices;
+using HAMS.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,57 +19,35 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDoctorSchedule([FromBody] AddDoctorSchedule model)
+        public async Task<ServiceResult> AddDoctorSchedule([FromBody] AddDoctorSchedule model)
         {
-            var added = await service.AddScheduleAsync(model);
-            if (!added)
-            {
-                return BadRequest("Schedule Already Exists");
-            }
-            return Ok("Schedule Added Succesfully");
+            return await service.AddScheduleAsync(model);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllDoctorSchedules()
+        public async Task<ServiceResult<List<ReadDoctorSchedule>>> GetAllDoctorSchedules()
         {
-            var schedules = await service.GetAllDoctorsScheduleAsync();
-            return Ok(schedules);
+            return await service.GetAllDoctorsScheduleAsync();
         }
 
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetScheduleById(int id)
+        public async Task<ServiceResult<ReadDoctorSchedule>> GetScheduleById(int id)
         {
-            var schedule = await service.GetScheduleByIdAsync(id);
-            if (schedule == null)
-            {
-                return NotFound("Schedule not found");
-            }
-            return Ok(schedule);
+            return await service.GetScheduleByIdAsync(id);
+
         }
 
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateScheduleById(int id, [FromBody] AddDoctorSchedule model)
+        public async Task<ServiceResult> UpdateScheduleById(int id, [FromBody] AddDoctorSchedule model)
         {
-            var updated = await service.UpdateScheduleByIdAsync(id, model);
-            if (!updated)
-            {
-                return NotFound("Schedule not found");
-            }
-                
-            return Ok("Schedule updated successfully");
+            return await service.UpdateScheduleByIdAsync(id, model);
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteScheduleById(int id)
+        public async Task<ServiceResult> DeleteScheduleById(int id)
         {
-            var deleted = await service.DeleteScheduleByIdAsync(id);
-            if (!deleted)
-            {
-                return NotFound("Schedule not found");
-            }
-                
-            return Ok("Schedule deleted successfully");
+            return await service.DeleteScheduleByIdAsync(id);
         }
     }
 }

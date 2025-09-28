@@ -1,4 +1,5 @@
 ﻿using HAMS.Domain.Models.MedicalRecordModels;
+using HAMS.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace HAMS.Services.MedicalRecordServices
 {
     public interface IMedicalRecordService
     {
-        Task<bool> AddAsync(AddMedicalRecord model);
-        Task<bool> UpdateAsync(int id, UpdateMedicalRecord model);
-        Task<bool> DeleteAsync(int id);
-        Task<IEnumerable<ReadMedicalRecord>> GetAllAsync();
-        Task<IEnumerable<ReadMedicalRecordByPatient>> GetRecordsForPatientAsync(Guid patId);
+        Task<ServiceResult> AddAsync(AddMedicalRecord model);
+        Task<ServiceResult> UpdateAsync(int id, UpdateMedicalRecord model);
+        Task<ServiceResult> DeleteAsync(int id);
+        Task<ServiceResult<List<ReadMedicalRecord>>> GetAllAsync();
+        Task<ServiceResult<List<ReadMedicalRecordByPatient>>> GetRecordsForPatientAsync(Guid patId);
 
     }
 }

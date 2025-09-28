@@ -3,6 +3,7 @@ using HAMS.Domain.Entities;
 using HAMS.Domain.Models.AppointmentModels;
 using HAMS.Domain.Models.MedicalRecordModels;
 using HAMS.Domain.Models.PatientModels;
+using HAMS.Utility;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,10 @@ namespace HAMS.Services.PatientServices
             this.context = context;
         }
 
-        public async Task<List<ReadPatient>> GetAllAsync()
+        public async Task<ServiceResult<List<ReadPatient>>> GetAllAsync()
         {
-            return await context.Patients.Where(x=>x.User.IsActive)
+            var result = new ServiceResult<List<ReadPatient>>();
+            var patients = await context.Patients.Where(x => x.User.IsActive)
                 .Select(p => new ReadPatient
                 {
                     PatientId = p.PatientId,
@@ -34,64 +36,71 @@ namespace HAMS.Services.PatientServices
                     Address = p.Address,
                     BloodGroup = p.BloodGroup
                 }).ToListAsync();
+
+            result.SetSuccess(patients);
+            return result;
         }
 
-        public async Task<ReadPatient> GetByIdAsync(Guid id)
+        public async Task<ServiceResult<ReadPatient>> GetByIdAsync(Guid id)
         {
-            var patient = await context.Patients.FirstOrDefaultAsync(x=>x.PatientId==id && x.User.IsActive);
-            if (patient == null) 
-            {
-                return null;
-            }
-
-            return new ReadPatient
-            {
-                PatientId = patient.PatientId,
-                Name = patient.PatientName,
-                Gender = patient.Gender,
-                DateOfBirth = patient.DOB,
-                Mobile = patient.User.ContactNo,
-                Email = patient.User.Email,
-                Address = patient.Address,
-                BloodGroup = patient.BloodGroup
-            };
-        }
-
-        public async Task<bool> UpdateAsync(Guid id, UpdatePatient model)
-        {
+            var result = new ServiceResult<ReadPatient>();
             var patient = await context.Patients.FirstOrDefaultAsync(x => x.PatientId == id && x.User.IsActive);
-            if (patient == null)
+            if (patient != null)
             {
-                return false;
+                var patientModel = new ReadPatient
+                {
+                    PatientId = patient.PatientId,
+                    Name = patient.PatientName,
+                    Gender = patient.Gender,
+                    DateOfBirth = patient.DOB,
+                    Mobile = patient.User.ContactNo,
+                    Email = patient.User.Email,
+                    Address = patient.Address,
+                    BloodGroup = patient.BloodGroup
+                };
+
+                result.SetSuccess(patientModel);
             }
-
-            patient.PatientName = model.Name;
-            patient.Gender = model.Gender;
-            patient.DOB = model.DateOfBirth;
-            patient.User.ContactNo = model.Mobile;
-            patient.User.Email = model.Email;
-            patient.Address = model.Address;
-            patient.BloodGroup = model.BloodGroup;
-
-            await context.SaveChangesAsync();
-            return true;
+            return result;
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<ServiceResult> UpdateAsync(Guid id, UpdatePatient model)
         {
-            var patient = await context.Patients.FindAsync(id);
-            if (patient == null)
+            var result = new ServiceResult();
+            var patient = await context.Patients.FirstOrDefaultAsync(x => x.PatientId == id && x.User.IsActive);
+            if (patient != null)
             {
-                return false;
+                patient.PatientName = model.Name;
+                patient.Gender = model.Gender;
+                patient.DOB = model.DateOfBirth;
+                patient.User.ContactNo = model.Mobile;
+                patient.User.Email = model.Email;
+                patient.Address = model.Address;
+                patient.BloodGroup = model.BloodGroup;
+
+                await context.SaveChangesAsync();
+                result.SetSuccess();
             }
 
-            patient.User.IsActive = false;
-            await context.SaveChangesAsync();
-            return true;
+            return result;
         }
-        public async Task<IEnumerable<ReadPatient>> SearchPatientsAsync(string? name, string? email, string? mobile)
+
+        public async Task<ServiceResult> DeleteAsync(Guid id)
         {
-            var query = context.Users.Include(x=>x.Patient).AsNoTracking().AsQueryable();
+            var result = new ServiceResult();
+            var user = await context.Users.FirstOrDefaultAsync(d => d.UserId == id && d.IsActive);
+            if (user != null)
+            {
+                user.IsActive = false;
+                await context.SaveChangesAsync();
+                result.SetSuccess();
+            }
+            return result;
+        }
+        public async Task<ServiceResult<List<ReadPatient>>> SearchPatientsAsync(string? name, string? email, string? mobile)
+        {
+            var result = new ServiceResult<List<ReadPatient>>();
+            var query = context.Users.AsNoTracking().Include(x => x.Patient).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(name))
                 query = query.Where(p => p.Patient.PatientName.Contains(name));
@@ -102,7 +111,7 @@ namespace HAMS.Services.PatientServices
             if (!string.IsNullOrWhiteSpace(mobile))
                 query = query.Where(p => p.ContactNo.Contains(mobile));
 
-            return await query.Select(p => new ReadPatient
+            var patients = await query.Select(p => new ReadPatient
             {
                 PatientId = p.Patient.PatientId,
                 Name = p.Patient.PatientName,
@@ -113,6 +122,9 @@ namespace HAMS.Services.PatientServices
                 BloodGroup = p.Patient.BloodGroup,
                 Address = p.Patient.Address
             }).ToListAsync();
+
+            result.SetSuccess(patients);
+            return result;
         }
 
     }

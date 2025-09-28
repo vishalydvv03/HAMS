@@ -2,6 +2,8 @@
 using HAMS.Domain.Entities;
 using HAMS.Domain.Enums;
 using HAMS.Domain.Models.AuthenticationModel;
+using HAMS.Utility;
+using HAMS.Utility.UtilityHelpers.JwtToken;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,60 +13,67 @@ namespace HAMS.Services.AuthenticationServices
     public class AuthService : IAuthService
     {
         private readonly HamsDbContext context;
-        private readonly IPasswordHasher<User> hasher;
+        private readonly IPasswordHasher<User> hasher; 
+        private readonly IJwtTokenService tokenService;
 
-        public AuthService(HamsDbContext context, IPasswordHasher<User> hasher)
+        public AuthService(HamsDbContext context, IPasswordHasher<User> hasher, IJwtTokenService tokenService)
         {
             this.context = context;
             this.hasher = hasher;
+            this.tokenService = tokenService;
         }
 
-        public async Task<bool> RegisterPatientAsync(RegisterPatient model)
+        public async Task<ServiceResult> RegisterPatientAsync(RegisterPatient model)
         {
+            var result = new ServiceResult();
             var userExists = await context.Users.AnyAsync(u => u.Email == model.Email || u.ContactNo == model.ContactNo);
-            if (userExists)
+            if (!userExists)
             {
-                return false;
+                var id = Guid.NewGuid();
+
+                var user = new User
+                {
+                    UserId = id,
+                    Email = model.Email,
+                    ContactNo = model.ContactNo,
+                    Role = UserRole.Patient,
+                    CreatedAt = DateTime.UtcNow,
+                    PasswordHash = hasher.HashPassword(null, model.Password)
+                };
+
+                var patient = new Patient
+                {
+                    PatientId = id,
+                    PatientName = model.PatientName,
+                    Gender = model.Gender,
+                    BloodGroup = model.BloodGroup,
+                    Address = model.Address,
+                    DOB = model.DOB
+                };
+
+                context.Users.Add(user);
+                context.Patients.Add(patient);
+                await context.SaveChangesAsync();
+                result.SetSuccess();
             }
-
-            var id = Guid.NewGuid();
-
-            var user = new User
+            else
             {
-                UserId = id,
-                Email = model.Email,
-                ContactNo = model.ContactNo,
-                Role = UserRole.Patient,
-                CreatedAt = DateTime.UtcNow,
-                PasswordHash = hasher.HashPassword(null, model.Password)
-            };
-
-            var patient = new Patient
-            {
-                PatientId = id,         
-                PatientName = model.PatientName,
-                Gender = model.Gender,
-                BloodGroup = model.BloodGroup,
-                Address = model.Address,
-                DOB = model.DOB
-            };
-
-            context.Users.Add(user);
-            context.Patients.Add(patient);
-            await context.SaveChangesAsync();
-            return true;
+                result.SetConflict();
+            }
+            return result;
         }
-        public async Task<bool> RegisterDoctorAsync(RegisterDoctor model)
+        public async Task<ServiceResult> RegisterDoctorAsync(RegisterDoctor model)
         {
+            var result = new ServiceResult();
             var userExists = await context.Users.AnyAsync(u => u.Email == model.Email || u.ContactNo == model.ContactNo);
             if (userExists)
             {
-                return false;
+                result.SetConflict();
             }
             var deptExists = await context.Departments.AnyAsync(d => d.DepartmentId == model.DepartmentId );
             if (!deptExists)
             {
-                return false;
+                result.SetBadRequest("No Department Exists");
             }
 
             var id = Guid.NewGuid();
@@ -90,22 +99,27 @@ namespace HAMS.Services.AuthenticationServices
             context.Users.Add(user);
             context.Doctors.Add(doctor);
             await context.SaveChangesAsync();
-            return true;
+            result.SetSuccess();
+            return result;
         }
-        public async Task<User?> ValidateCredentialsAsync(UserLogin model)
+        public async Task<ServiceResult> ValidateCredentialsAsync(UserLogin model)
         {
-            var user = await context.Users.SingleOrDefaultAsync(u => u.Email == model.Email);
-            if (user == null)
+            var result = new ServiceResult();
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+            if (user != null)
             {
-                return null;
+                var verifyUser = hasher.VerifyHashedPassword(user, user.PasswordHash, model.Password);
+                if (verifyUser == PasswordVerificationResult.Success)
+                {
+                    var token = tokenService.GenerateToken(user);
+                    result.SetSuccess(token);
+                }
             }
-
-            var result = hasher.VerifyHashedPassword(user, user.PasswordHash, model.Password);
-            if (result != PasswordVerificationResult.Success)
+            else
             {
-                return null;
-            }
-            return user;
+                result.SetUnAuthorized();
+            }  
+            return result;
         }
     }
 }

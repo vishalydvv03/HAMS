@@ -1,8 +1,10 @@
 ﻿using HAMS.Domain.Models.AppointmentModels;
+using HAMS.Domain.Models.MedicalRecordModels;
 using HAMS.Domain.Models.PatientModels;
 using HAMS.Services.AppointmentServices;
 using HAMS.Services.MedicalRecordServices;
 using HAMS.Services.PatientServices;
+using HAMS.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,64 +26,45 @@ namespace HAMS.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ServiceResult<List<ReadPatient>>> GetAll()
         {
-            var data = await patientService.GetAllAsync();
-            return Ok(data);
+            return await patientService.GetAllAsync();
         }
 
         [HttpGet("{id:Guid}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<ServiceResult<ReadPatient>> GetById(Guid id)
         {
-            var data = await patientService.GetByIdAsync(id);
-            if (data == null)
-            {
-                return NotFound("Patient not found");
-            }
-            return Ok(data);
+            return await patientService.GetByIdAsync(id);
         }
 
         [HttpPut("{id:Guid}")]
-        public async Task<IActionResult> Update(Guid id, UpdatePatient model)
+        public async Task<ServiceResult> Update(Guid id, UpdatePatient model)
         {
-            var updated = await patientService.UpdateAsync(id, model);
-            if (!updated) 
-            {
-                return NotFound("Patient not found");
-            } 
-            return Ok("Patient updated successfully");
+            return await patientService.UpdateAsync(id, model);
         }
 
         [HttpDelete("{id:Guid}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<ServiceResult> Delete(Guid id)
         {
-            var deleted = await patientService.DeleteAsync(id);
-            if (!deleted) 
-            {
-                return NotFound("Patient not found");
-            }
-            return Ok("Patient deleted successfully");
+            return await patientService.DeleteAsync(id);
         }
 
         [HttpGet("{patientId:guid}/appointments")]
-        public async Task<IActionResult> GetAllAppointmentsByPatient(Guid patientId)
+        public async Task<ServiceResult<List<ReadAppointmentByPatient>>> GetAllAppointmentsByPatient(Guid patientId)
         {
-            var data = await appointmentService.GetAppointmentByPatientAsync(patientId);
-            return Ok(data);
+            return await appointmentService.GetAppointmentByPatientAsync(patientId);
         }
 
         [HttpGet("{patientId:guid}/medical-records")]
-        public async Task<IActionResult> GetMedicalRecords(Guid patientId)
+        public async Task<ServiceResult<List<ReadMedicalRecordByPatient>>> GetMedicalRecords(Guid patientId)
         {
-            var data = await recordService.GetRecordsForPatientAsync(patientId);
-            return Ok(data);
+            return await recordService.GetRecordsForPatientAsync(patientId);
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> SearchPatients([FromQuery] string? name, [FromQuery] string? email, [FromQuery] string? mobile)
+        public async Task<ServiceResult<List<ReadPatient>>> SearchPatients([FromQuery] string? name, [FromQuery] string? email, [FromQuery] string? mobile)
         {
-            var result = await patientService.SearchPatientsAsync(name, email, mobile);
-            return Ok(result);
+            return await patientService.SearchPatientsAsync(name, email, mobile);
         }
     }
 

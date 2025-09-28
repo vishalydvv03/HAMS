@@ -1,6 +1,7 @@
 ﻿using HAMS.Data;
 using HAMS.Domain.Models.MedicalRecordModels;
 using HAMS.Services.MedicalRecordServices;
+using HAMS.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,43 +18,28 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddRecord(AddMedicalRecord model)
+        public async Task<ServiceResult> AddRecord(AddMedicalRecord model)
         {
-            var result = await service.AddAsync(model);
-            if (!result)
-            {
-                return BadRequest("Appointment not completed or record exists");
-            }
-            return Ok("Record Added");                          
+            return await service.AddAsync(model);                   
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateRecord(int id, UpdateMedicalRecord model) 
+        public async Task<ServiceResult> UpdateRecord(int id, UpdateMedicalRecord model) 
         {
-            var result = await service.UpdateAsync(id, model);
-            if (!result)
-            {
-                return NotFound("No Such Record");
-            }
-            return Ok("Record Updated");
+            return await service.UpdateAsync(id, model);
         }
             
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteRecord(int id)
+        public async Task<ServiceResult> DeleteRecord(int id)
         {
-            var result = await service.DeleteAsync(id);
-            if (!result)
-            {
-                return NotFound("No Such Record");
-            }
-            return Ok("Record Deleted");
+            return await service.DeleteAsync(id);
         }
             
         [HttpGet]
-        public async Task<IActionResult> GetAllRecords() 
+        public async Task<ServiceResult<List<ReadMedicalRecord>>> GetAllRecords() 
         {
-            var data = await service.GetAllAsync();
-            return Ok(data);
+            return await service.GetAllAsync();
+
         }
     }
 }

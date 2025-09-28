@@ -2,6 +2,7 @@
 using HAMS.Domain.Entities;
 using HAMS.Domain.Enums;
 using HAMS.Domain.Models.DoctorScheduleModels;
+using HAMS.Utility;
 using Microsoft.EntityFrameworkCore;
 
 namespace HAMS.Services.DoctorScheduleServices
@@ -15,11 +16,12 @@ namespace HAMS.Services.DoctorScheduleServices
             this.context = context;
         }
 
-        public async Task<IEnumerable<ReadDoctorSchedule>> GetSchedulesByDoctorAsync(Guid doctorId)
+        public async Task<ServiceResult<List<ReadDoctorSchedule>>> GetSchedulesByDoctorAsync(Guid doctorId)
         {
+            var result = new ServiceResult<List<ReadDoctorSchedule>>();
             var data = await context.DoctorSchedules
                                     .Include(d => d.Doctor).ThenInclude(s => s.Department)
-                                    .Where(x=>x.DoctorId==doctorId)
+                                    .Where(x => x.DoctorId == doctorId)
                                     .Select(x => new ReadDoctorSchedule()
                                     {
                                         DoctorName = x.Doctor.DoctorName,
@@ -29,65 +31,71 @@ namespace HAMS.Services.DoctorScheduleServices
                                         EndTime = x.EndTime,
                                         IsOnLeave = x.IsOnLeave
                                     }).ToListAsync();
-            return data;
-                
+            result.SetSuccess(data);
+            return result;
+
         }
 
-        public async Task<bool> AddScheduleAsync(AddDoctorSchedule model)
+        public async Task<ServiceResult> AddScheduleAsync(AddDoctorSchedule model)
         {
+            var result = new ServiceResult();
             var schedule = await context.DoctorSchedules.FirstOrDefaultAsync(s => s.DoctorId == model.DoctorId && s.Day == model.Day);
-
-            if (schedule != null)
-            {
-                return false;
-            }
-
-            var newSchedule = new DoctorSchedule
-            {
-                DoctorId = model.DoctorId,
-                Day = model.Day,
-                StartTime = model.StartTime,
-                EndTime = model.EndTime,
-                IsOnLeave = model.IsOnLeave
-            };
-
-            context.DoctorSchedules.Add(newSchedule);
-            await context.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<bool> UpdateScheduleAsync(Guid doctorId, WeekDay day, UpdateDoctorSchedule model)
-        {
-            var schedule = await context.DoctorSchedules.FirstOrDefaultAsync(s => s.DoctorId == doctorId && s.Day == day);
-
-            if (schedule == null) 
-            {
-                return false;
-            }
-
-            schedule.StartTime = model.StartTime;
-            schedule.EndTime = model.EndTime;
-            schedule.IsOnLeave = model.IsOnLeave;
-
-            await context.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<bool> DeleteScheduleAsync(Guid doctorId, WeekDay day)
-        {
-            var schedule = await context.DoctorSchedules.FirstOrDefaultAsync(s => s.DoctorId == doctorId && s.Day == day);
 
             if (schedule == null)
             {
-                return false;
+                var newSchedule = new DoctorSchedule
+                {
+                    DoctorId = model.DoctorId,
+                    Day = model.Day,
+                    StartTime = model.StartTime,
+                    EndTime = model.EndTime,
+                    IsOnLeave = model.IsOnLeave
+                };
+
+                context.DoctorSchedules.Add(newSchedule);
+                await context.SaveChangesAsync();
+                result.SetSuccess();
             }
-            context.DoctorSchedules.Remove(schedule);
-            await context.SaveChangesAsync();
-            return true;
+            else
+            {
+                result.SetConflict();
+            }
+            return result;
         }
-        public async Task<List<ReadDoctorSchedule>> GetAllDoctorsScheduleAsync()
+
+        public async Task<ServiceResult> UpdateScheduleAsync(Guid doctorId, WeekDay day, UpdateDoctorSchedule model)
         {
-            var data = await context.DoctorSchedules.Include(d=>d.Doctor).ThenInclude(d=>d.Department)
+            var result = new ServiceResult();
+            var schedule = await context.DoctorSchedules.FirstOrDefaultAsync(s => s.DoctorId == doctorId && s.Day == day);
+
+            if (schedule != null)
+            {
+                schedule.StartTime = model.StartTime;
+                schedule.EndTime = model.EndTime;
+                schedule.IsOnLeave = model.IsOnLeave;
+                await context.SaveChangesAsync();
+                result.SetSuccess();
+            }
+            return result;
+        }
+
+        public async Task<ServiceResult> DeleteScheduleAsync(Guid doctorId, WeekDay day)
+        {
+            var result = new ServiceResult();
+            var schedule = await context.DoctorSchedules.FirstOrDefaultAsync(s => s.DoctorId == doctorId && s.Day == day);
+
+            if (schedule != null)
+            {
+                context.DoctorSchedules.Remove(schedule);
+                await context.SaveChangesAsync();
+                result.SetSuccess();
+            }
+            return result;
+        }
+        public async Task<ServiceResult<List<ReadDoctorSchedule>>> GetAllDoctorsScheduleAsync()
+        {
+            var result = new ServiceResult<List<ReadDoctorSchedule>>();
+            var data = await context.DoctorSchedules.Include(d => d.Doctor).ThenInclude(d => d.Department)
                 .Select(s => new ReadDoctorSchedule
                 {
                     ScheduleId = s.ScheduleId,
@@ -96,63 +104,64 @@ namespace HAMS.Services.DoctorScheduleServices
                     Day = s.Day,
                     StartTime = s.StartTime,
                     EndTime = s.EndTime,
-                    IsOnLeave=s.IsOnLeave,
+                    IsOnLeave = s.IsOnLeave,
                 })
                 .ToListAsync();
-
-            return data;
+            result.SetSuccess(data);
+            return result;
         }
-        public async Task<ReadDoctorSchedule?> GetScheduleByIdAsync(int scheduleId)
+        public async Task<ServiceResult<ReadDoctorSchedule>> GetScheduleByIdAsync(int scheduleId)
         {
+            var result = new ServiceResult<ReadDoctorSchedule>();
             var schedule = await context.DoctorSchedules.Include(d => d.Doctor).ThenInclude(d => d.Department)
-                .FirstOrDefaultAsync(x=>x.ScheduleId==scheduleId);
-            if (schedule == null)
+                .FirstOrDefaultAsync(x => x.ScheduleId == scheduleId);
+            if (schedule != null)
             {
-                return null;
+                var data = new ReadDoctorSchedule
+                {
+                    ScheduleId = schedule.ScheduleId,
+                    DoctorName = schedule.Doctor.DoctorName,
+                    DepartmentName = schedule.Doctor.Department.DeptName,
+                    Day = schedule.Day,
+                    StartTime = schedule.StartTime,
+                    EndTime = schedule.EndTime,
+                    IsOnLeave = schedule.IsOnLeave
+                };
+                result.SetSuccess(data);
             }
-           
-            var data = new ReadDoctorSchedule
-            {
-                ScheduleId = schedule.ScheduleId,
-                DoctorName = schedule.Doctor.DoctorName,
-                DepartmentName = schedule.Doctor.Department.DeptName,
-                Day = schedule.Day,
-                StartTime = schedule.StartTime,
-                EndTime = schedule.EndTime,
-                IsOnLeave = schedule.IsOnLeave
-            };
-
-            return data;
+            return result;
         }
 
-        public async Task<bool> UpdateScheduleByIdAsync(int scheduleId, AddDoctorSchedule model)
+        public async Task<ServiceResult> UpdateScheduleByIdAsync(int scheduleId, AddDoctorSchedule model)
         {
+            var result = new ServiceResult();
             var schedule = await context.DoctorSchedules.FindAsync(scheduleId);
-            if (schedule == null)
+            if (schedule != null)
             {
-                return false;
-            }
-            schedule.DoctorId = model.DoctorId;
-            schedule.Day = model.Day;
-            schedule.StartTime = model.StartTime;
-            schedule.EndTime = model.EndTime;
-            schedule.IsOnLeave = model.IsOnLeave;
+                schedule.DoctorId = model.DoctorId;
+                schedule.Day = model.Day;
+                schedule.StartTime = model.StartTime;
+                schedule.EndTime = model.EndTime;
+                schedule.IsOnLeave = model.IsOnLeave;
 
-            context.DoctorSchedules.Update(schedule);
-            await context.SaveChangesAsync();
-            return true;
+                context.DoctorSchedules.Update(schedule);
+                await context.SaveChangesAsync();
+                result.SetSuccess();
+            }
+            return result;
         }
 
-        public async Task<bool> DeleteScheduleByIdAsync(int scheduleId)
+        public async Task<ServiceResult> DeleteScheduleByIdAsync(int scheduleId)
         {
+            var result = new ServiceResult();
             var schedule = await context.DoctorSchedules.FindAsync(scheduleId);
-            if (schedule == null)
+            if (schedule != null)
             {
-                return false;
+                context.DoctorSchedules.Remove(schedule);
+                await context.SaveChangesAsync();
+                result.SetSuccess();
             }
-            context.DoctorSchedules.Remove(schedule);
-            await context.SaveChangesAsync();
-            return true;
+            return result;
         }
 
     }

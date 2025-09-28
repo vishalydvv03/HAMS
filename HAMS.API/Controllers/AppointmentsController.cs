@@ -1,5 +1,6 @@
 ﻿using HAMS.Domain.Models.AppointmentModels;
 using HAMS.Services.AppointmentServices;
+using HAMS.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.InteropServices;
@@ -17,59 +18,33 @@ namespace HAMS.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> BookAppointmentForPatient(AddAppointment model)
+        public async Task<ServiceResult> BookAppointmentForPatient(AddAppointment model)
         {
-            var result = await service.BookAppointmentAsync(model);
-
-            if (result == false)
-            {
-                return BadRequest("Could not Book Appointment");
-            }
-
-            return Ok("Appointment Booked Successfully");
+            return await service.BookAppointmentAsync(model);
         }
 
         [HttpPut("{id:int}/cancel")]
-        public async Task<IActionResult> Cancel(int id)
+        public async Task<ServiceResult> Cancel(int id)
         {
-            var result = await service.CancelAppointmentAsync(id);
-            if (!result)
-            {
-                return NotFound("No Such Appointment");
-            }
-
-            return Ok("Appointment Cancelled Successfully");
+            return await service.CancelAppointmentAsync(id);
         }
             
         [HttpPut("{id:int}/reschedule")]
-        public async Task<IActionResult> Reschedule(int id, RescheduleAppointment model)
+        public async Task<ServiceResult> Reschedule(int id, RescheduleAppointment model)
         {
-            var result = await service.RescheduleAppointmentAsync(id, model);
-            if (!result)
-            {
-                return BadRequest("New Slot Unavailable");
-            }
-
-            return Ok("Appointment Rescheduled Successfully");
+            return await service.RescheduleAppointmentAsync(id, model);
         }
 
         [HttpPut("{id:int}/complete")]
-        public async Task<IActionResult> Complete(int id)
+        public async Task<ServiceResult> Complete(int id)
         {
-            var result = await service.CompleteAppointmentAsync(id);
-            if (!result)
-            {
-                return NotFound("No Such Appointment");
-            }
-
-            return Ok("Appointment Marked as Completed");
+            return await service.CompleteAppointmentAsync(id);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAppointments()
+        public async Task<ServiceResult<List<ReadAppointment>>> GetAllAppointments()
         {
-            var data = await service.GetAllAppointmentsAsync();
-            return Ok(data);
+            return await service.GetAllAppointmentsAsync();
         }
             
     }

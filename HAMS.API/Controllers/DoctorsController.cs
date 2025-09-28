@@ -1,9 +1,11 @@
 ﻿using HAMS.Domain.Enums;
+using HAMS.Domain.Models.AppointmentModels;
 using HAMS.Domain.Models.DoctorModels;
 using HAMS.Domain.Models.DoctorScheduleModels;
 using HAMS.Services.AppointmentServices;
 using HAMS.Services.DoctorScheduleServices;
 using HAMS.Services.DoctorServices;
+using HAMS.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,82 +25,54 @@ namespace HAMS.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ServiceResult<List<DoctorDetails>>> GetAll()
         {
-            var data = await service.GetAllAsync();
-            return Ok(data);
+            return await service.GetAllAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<ServiceResult<DoctorDetails>> GetById(Guid id)
         {
-            var data = await service.GetByIdAsync(id);
-            if (data == null)
-            {
-                return NotFound("Doctor not found");
-            }
-            return Ok(data);
+            return await service.GetByIdAsync(id);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, UpdateDoctor model)
+        public async Task<ServiceResult> Update(Guid id, UpdateDoctor model)
         {
-            var updated = await service.UpdateAsync(id, model);
-            if (!updated)
-            {
-                return NotFound("Doctor not found");
-            }
-            return Ok("Doctor updated successfully");
+            return await service.UpdateAsync(id, model);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<ServiceResult> Delete(Guid id)
         {
-            var deleted = await service.DeleteAsync(id);
-            {
-                if (!deleted)
-                {
-                    return NotFound("Doctor not found");
-                }
-                return Ok("Doctor deleted successfully");
-            }
+            return await service.DeleteAsync(id);
         }
 
         [HttpGet("{id}/schedules")]
-        public async Task<IActionResult> GetDoctorSchedule(Guid id)
+        public async Task<ServiceResult<List<ReadDoctorSchedule>>> GetDoctorSchedule(Guid id)
         {
-            var data = await scheduleService.GetSchedulesByDoctorAsync(id);
-            return Ok(data);
+            return await scheduleService.GetSchedulesByDoctorAsync(id);
+
         }
 
         [HttpGet("{doctorId:guid}/appointments")]
-        public async Task<IActionResult> GetAppointments(Guid doctorId)
+        public async Task<ServiceResult<List<ReadAppointmentByDoctor>>> GetAppointments(Guid doctorId)
         {
-            var data = await service.GetAppointmentByDoctorAsync(doctorId);
-            return Ok(data);
+            return await service.GetAppointmentByDoctorAsync(doctorId);
+
         }
 
 
         [HttpPut("{id}/schedules")]
-        public async Task<IActionResult> UpdateDoctorSchedule(Guid id, [FromQuery] WeekDay day, [FromBody] UpdateDoctorSchedule model)
+        public async Task<ServiceResult> UpdateDoctorSchedule(Guid id, [FromQuery] WeekDay day, [FromBody] UpdateDoctorSchedule model)
         {
-            var updated = await scheduleService.UpdateScheduleAsync(id, day, model);
-            if (!updated)
-            {
-                return NotFound("No Such Schedule Exists");
-            }
-            return Ok("Schedule Updated Succesfully");
+            return await scheduleService.UpdateScheduleAsync(id, day, model);
         }
 
         [HttpDelete("{id}/schedules")]
-        public async Task<IActionResult> DeleteDoctorSchedule(Guid id, [FromQuery] WeekDay day)
+        public async Task<ServiceResult> DeleteDoctorSchedule(Guid id, [FromQuery] WeekDay day)
         {
-            var deleted = await scheduleService.DeleteScheduleAsync(id, day);
-            if (!deleted)
-            {
-                return NotFound("No Such Schedule Exists");
-            }
-            return Ok("Schedule deleted successfully");
+            return await scheduleService.DeleteScheduleAsync(id, day);
         }
     } 
 }

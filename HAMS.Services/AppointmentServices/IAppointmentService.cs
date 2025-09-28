@@ -1,4 +1,5 @@
 ﻿using HAMS.Domain.Models.AppointmentModels;
+using HAMS.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace HAMS.Services.AppointmentServices
 {
     public interface IAppointmentService
     {
-        Task<bool> BookAppointmentAsync(AddAppointment model);
-        Task<bool> CancelAppointmentAsync(int appointmentId);
-        Task<bool> RescheduleAppointmentAsync(int appointmentId, RescheduleAppointment model);
-        Task<bool> CompleteAppointmentAsync(int appointmentId);
-        Task<IEnumerable<ReadAppointment>> GetAllAppointmentsAsync();
-        Task<IEnumerable<ReadAppointmentByPatient>> GetAppointmentByPatientAsync(Guid patientId);
+        Task<ServiceResult> BookAppointmentAsync(AddAppointment model);
+        Task<ServiceResult> CancelAppointmentAsync(int appointmentId);
+        Task<ServiceResult> RescheduleAppointmentAsync(int appointmentId, RescheduleAppointment model);
+        Task<ServiceResult> CompleteAppointmentAsync(int appointmentId);
+        Task<ServiceResult<List<ReadAppointment>>> GetAllAppointmentsAsync();
+        Task<ServiceResult<List<ReadAppointmentByPatient>>> GetAppointmentByPatientAsync(Guid patientId);
     }
 }

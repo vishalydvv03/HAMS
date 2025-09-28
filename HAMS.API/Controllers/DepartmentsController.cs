@@ -2,6 +2,7 @@
 using HAMS.Domain.Models.Department;
 using HAMS.Domain.Models.DepartmentModels;
 using HAMS.Services.DepartmentServices;
+using HAMS.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -20,54 +21,33 @@ namespace HAMS.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReadDepartment>>> GetAllDepartments()
+        public async Task<ServiceResult<List<ReadDepartment>>> GetAllDepartments()
         {
-            var data = await service.GetAllDepartmentAsync();
-            return Ok(data);
+            return await service.GetAllDepartmentAsync();
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<ReadDepartment>> GetDepartmentById(int id)
+        public async Task<ServiceResult<ReadDepartment>> GetDepartmentById(int id)
         {
-            var data = await service.GetDepartmentByIdAsync(id);
-            if(data == null)
-            {
-                return NotFound("No Department with this Id Exists");
-            }
-            return Ok(data);
+            return await service.GetDepartmentByIdAsync(id);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDepartment(AddDepartment dept)
+        public async Task<ServiceResult> CreateDepartment(AddDepartment dept)
         {
-            var result = await service.AddDepartmentAsync(dept);
-            if (result == false)
-            {
-                return Conflict("Department with this Name Already exists");
-            }
-            return Ok("New Department Added Successfully");
+            return await service.AddDepartmentAsync(dept);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> UpdateDepartment(int id, AddDepartment dept)
+        public async Task<ServiceResult> UpdateDepartment(int id, AddDepartment dept)
         {
-            var result = await service.UpdateDepartmentAsync(id, dept);
-            if (result == false)
-            {
-                return NotFound("No Such Department Exist");
-            }
-            return Ok("Department Updated Successfully");
+            return await service.UpdateDepartmentAsync(id, dept);
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteDepartment(int id)
+        public async Task<ServiceResult> DeleteDepartment(int id)
         {
-            var result = await service.DeleteDepartmentAsync(id);
-            if (result == false)
-            {
-                return NotFound("No Such Department Exist");
-            }
-            return Ok("Department Removed Successfully");
+            return await service.DeleteDepartmentAsync(id);
         }
     }
 }
