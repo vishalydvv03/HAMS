@@ -1,4 +1,5 @@
 
+using HAMS.API.Middlewares;
 using HAMS.Data;
 using HAMS.Domain.Entities;
 using HAMS.Services.AppointmentServices;
@@ -59,7 +60,7 @@ namespace HAMS.API
                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
                     ValidAudience = builder.Configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                        Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
                 };
             });
 
@@ -68,6 +69,8 @@ namespace HAMS.API
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

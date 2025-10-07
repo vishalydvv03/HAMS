@@ -33,5 +33,6 @@ namespace HAMS.Data
         public DbSet<DoctorSchedule> DoctorSchedules { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<ExceptionLog> ExceptionLogs { get; set; }
     }
 }
